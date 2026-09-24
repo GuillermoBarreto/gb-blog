@@ -12,6 +12,13 @@ export default function About() {
       <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-zinc-50">
         About
       </h1>
+      <img
+        src="/profile.jpg"
+        alt="Guillermo Barreto"
+        width={150}
+        height={150}
+        className="mt-8 h-[150px] w-[150px] rounded-full object-cover ring-1 ring-zinc-700"
+      />
       <div className="prose-blog mt-8">
         <p>
           Hi, I&apos;m {SITE_NAME}. I&apos;m a software engineering student at
