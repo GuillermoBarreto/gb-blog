@@ -1,6 +1,8 @@
 # gb-blog — Guillermo Barreto's personal tech blog
 
-A personal tech blog built with **Next.js (App Router) + TypeScript + Tailwind CSS + MDX**. Dark, modern, responsive, and deployable to Vercel.
+🚀 **Live: [https://gb-blog.vercel.app](https://gb-blog.vercel.app)**
+
+A personal tech blog built with **Next.js (App Router) + TypeScript + Tailwind CSS + MDX**. Dark, modern, responsive, and deployed to Vercel.
 
 ## Run it locally
 
@@ -61,3 +63,4 @@ lib/
 
 - Set the real domain in `lib/site.ts` (`SITE_URL`) — it drives metadata, sitemap, RSS, and robots.
 - Posts are plain MDX files: edit, add, or delete them freely.
+
