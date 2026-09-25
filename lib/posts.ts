@@ -10,6 +10,7 @@ export interface PostMeta {
   excerpt: string;
   tags: string[];
   readingTime: string;
+  image: string; // cover image path, e.g. "/posts/my-post.jpg"
 }
 
 const POSTS_DIR = path.join(process.cwd(), "content/posts");
@@ -26,6 +27,7 @@ function readPostFile(slug: string): { meta: PostMeta; content: string } {
     excerpt: String(data.excerpt ?? ""),
     tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
     readingTime: readingTime(content).text,
+    image: String(data.image ?? ""),
   };
 
   return { meta, content };
