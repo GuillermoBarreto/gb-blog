@@ -1,0 +1,40 @@
+---
+title: "Microsoft gave an AI agent its own employee badge — trust is the whole story"
+date: "2026-09-25"
+excerpt: "Microsoft announced a persistent AI agent that lives in your company directory with its own identity and permissions. The same week, a coding assistant got caught quietly uploading entire code repos to the cloud. Both stories are about the same thing: defaults and permissions."
+tags: ["ai", "tech-news", "software-engineering"]
+---
+
+This week gave us both halves of the same lesson, two days apart.
+
+On Thursday, [Microsoft unveiled a new version of Copilot](https://blogs.microsoft.com/blog/2026/09/25/introducing-the-new-copilot-with-home-code-and-autopilot/) built around three capabilities: Home, Code, and Autopilot. A few days earlier, [Chinese AI lab Z.ai apologized after its coding assistant was caught uploading entire code repositories to the cloud without anyone's permission](https://wixx.com/2026/09/21/chinas-z-ai-disables-ai-coding-assistant-features-after-security-issue/). One company is handing AI agents an employee badge. Another just learned what happens when nobody checks the defaults.
+
+Let me break down what's actually happening, because the headlines only get half of it.
+
+## What Microsoft announced
+
+The new Copilot has three pillars. **Home** merges Chat and Cowork into one starting point, with Word, Excel, and PowerPoint built directly into the experience — you can build a real document or spreadsheet inside Copilot without switching apps, and teammates edit the same file live from the traditional Office apps.
+
+**Code** is the one that matters most for software people. You describe an app, dashboard, tracker, or workflow in natural language, and Copilot builds it. It's powered by the same underlying technology as GitHub Copilot, runs in a sandboxed environment, and can be hosted inside your own company's Microsoft 365 tenant. Microsoft's pitch: "small, purpose-built solutions anyone can create," where learning to build them becomes "as basic a skill as writing a memo." It rolls out to Microsoft's Frontier program at the end of the month, with a preview for Premium and Pro subscribers later this year.
+
+And then there's **Autopilot** (previously called Scout), the most ambitious piece. It's a persistent agent with its own identity, memory, computer, and workspace inside your company's tenant. It watches channels, follows up on threads, runs recurring work, and keeps going while you sleep. You can @mention it in Teams like a colleague. Microsoft is clear that it runs under permissions, audit, and governance that the organization controls.
+
+Microsoft also rolled out **FinOps for AI** — cost-management tools so employees and admins can see exactly what their AI usage is costing. That tells you something by itself: enterprises are already nervous about agents racking up bills in the background. [Reuters quoted Copilot product VP Annie Pearl](https://www.reuters.com/technology/microsoft-revamps-copilot-with-code-generation-agentic-ai-tools-2026-09-25/) on the real blocker: "it's been very hard for many organizations to bring agents into the enterprise because of security, compliance and governance concerns."
+
+## What happened with Z.ai
+
+Now the cautionary half. ZCode is the flagship AI coding assistant from Z.ai (also known as Zhipu). It had a "Codebase Indexing" feature, enabled by default with no way to turn it off, that packaged the user's **entire local workspace** — the full `.git` history, Git LFS cache, reflogs, even global app configs — encrypted the bundle, and uploaded it to Alibaba Cloud's object storage.
+
+A Chinese technical blogger known as Ferstar caught it: he noticed abnormal disk usage, traced it to ZCode background processes, and found a 313 MB encrypted archive of a commercial project failing to upload over and over — 564 failed attempts, per [reporting on the discovery](https://cybermagazine.com/news/how-z-ais-coding-agent-uploaded-user-data-without-consent). Users couldn't inspect what left their machines because the archives were encrypted with a key held only by Z.ai — so when the company said the data was "immediately destroyed," nobody outside the company could verify that. Z.ai apologized, disabled the features, open-sourced the ZCode client, added zero-data-retention options, and commissioned outside security assessments, according to [DevOps.com's coverage](https://devops.com/your-ai-coding-assistant-has-the-keys-to-the-repo-z-ai-just-showed-why-that-matters/).
+
+## Here's my take
+
+These aren't two separate stories. They're the same story told from opposite directions.
+
+Microsoft is formalizing the AI coworker: identity in the directory, memory, permissions, audit trails, a billing meter. Z.ai is the nightmare version: an agent that acts on your behalf, has the keys to your repo, and does things you never approved because a default was on and nobody audited it.
+
+As someone still learning this industry, this changed how I think about where the jobs are. Yesterday's post talked about securing the things AI agents touch. This week made it concrete: **the skill isn't writing good prompts, it's understanding permissions, defaults, and cost.** Who can this agent reach? What's turned on without asking me? Who pays when the meter runs while I'm asleep? Those are boring questions, and they're going to be somebody's whole career. Identity and access management for agents, FinOps for AI spend — these are new jobs wearing old job titles.
+
+I'm not pretending to be an expert on any of this. But I do notice a pattern: every time a company says "just let it run," the story that follows is about someone finding out what it was doing in the background. Check the defaults. Audit the agent. Trust, but with a dashboard.
+
+When your AI coworker has its own identity in the company directory and keeps working while you sleep — who owns its mistakes: you, your employer, or the vendor?
