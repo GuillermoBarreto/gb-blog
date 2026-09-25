@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
@@ -25,6 +26,7 @@ export async function generateMetadata({
     return {};
   }
   const url = `${SITE_URL}/blog/${slug}`;
+  const coverUrl = post.meta.image ? `${SITE_URL}${post.meta.image}` : undefined;
   return {
     title: post.meta.title,
     description: post.meta.excerpt,
@@ -36,11 +38,13 @@ export async function generateMetadata({
       url,
       publishedTime: post.meta.date,
       tags: post.meta.tags,
+      ...(coverUrl ? { images: [{ url: coverUrl, width: 2048, height: 1152 }] } : {}),
     },
     twitter: {
       card: "summary_large_image",
       title: post.meta.title,
       description: post.meta.excerpt,
+      ...(coverUrl ? { images: [coverUrl] } : {}),
     },
   };
 }
@@ -93,6 +97,19 @@ export default async function PostPage({
           </div>
         )}
       </header>
+
+      {meta.image && (
+        <div className="mt-8 overflow-hidden rounded-2xl border border-zinc-800">
+          <Image
+            src={meta.image}
+            alt={meta.title}
+            width={2048}
+            height={1152}
+            priority
+            className="h-auto w-full"
+          />
+        </div>
+      )}
 
       <div className="prose-blog mt-10">
         <MDXRemote
