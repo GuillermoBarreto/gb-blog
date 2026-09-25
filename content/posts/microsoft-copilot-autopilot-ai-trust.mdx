@@ -6,44 +6,24 @@ image: "/posts/microsoft-copilot-autopilot-ai-trust.jpg"
 tags: ["ai", "tech-news", "software-engineering"]
 ---
 
-This week handed me both halves of the same lesson, two days apart. I can't stop thinking about it.
+I found out this week that I had no idea what my AI coding assistant was doing behind my back. That scared me more than any headline.
 
-On Thursday, [Microsoft unveiled a new Copilot](https://blogs.microsoft.com/blog/2026/09/25/introducing-the-new-copilot-with-home-code-and-autopilot/) built around Home, Code, and Autopilot. A few days earlier, [Z.ai — a Chinese AI lab — had to apologize after its coding assistant was caught quietly uploading entire code repositories to the cloud](https://wixx.com/2026/09/21/chinas-z-ai-disables-ai-coding-assistant-features-after-security-issue/). No permission. No off switch.
+Two stories, same week. Microsoft announced a new Copilot with an AI agent that gets its own identity in your company directory — it watches channels, follows up on threads, works while you sleep. You @mention it like a coworker. [Full announcement here](https://blogs.microsoft.com/blog/2026/09/25/introducing-the-new-copilot-with-home-code-and-autopilot/).
 
-One company is giving AI agents an employee badge. The other just showed us what happens when nobody checks what the agent is doing in the background.
+And Z.ai, a Chinese AI lab, had to apologize because its coding assistant ZCode was quietly uploading users' *entire code repositories* to the cloud. Full git history. No permission asked. No way to turn it off. A blogger named Ferstar only caught it because his disk usage looked wrong — he traced it to a 313 MB encrypted archive failing to upload, over and over, 564 times. [The full story](https://cybermagazine.com/news/how-z-ais-coding-agent-uploaded-user-data-without-consent).
 
-## What Microsoft actually announced
+The part that got me: users couldn't even check what was taken, because Z.ai held the only encryption key. "We destroyed the data," they said. Sure. Trust us.
 
-Three pieces. **Home** merges Chat and Cowork into one starting point, with Word, Excel, and PowerPoint built right in — you build a real document inside Copilot, teammates edit it live from the normal Office apps.
+I use these tools every day. If you're learning to code in 2026, you probably do too. And I had never once checked what mine sends home. Not once. A default was on, I didn't ask questions, and I just got lucky mine wasn't the one in the news.
 
-**Code** is the one I keep thinking about. You describe an app or a dashboard in plain language, and Copilot builds it — powered by the same tech as GitHub Copilot, running sandboxed, hostable inside your company's own Microsoft 365 tenant. Microsoft's pitch is that building small tools becomes "as basic a skill as writing a memo." It hits their Frontier program at the end of the month, with a preview for Premium and Pro subscribers later this year.
+Microsoft's version is the formal one: the agent gets an identity, permissions, audit trails. They even shipped FinOps tools so companies can track what their AI spends — because agents are already racking up bills in the background. A Microsoft VP basically said the quiet part out loud: companies are afraid to deploy agents because of "security, compliance and governance concerns." [Reuters](https://www.reuters.com/technology/microsoft-revamps-copilot-with-code-generation-agentic-ai-tools-2026-09-25/)
 
-Then there's **Autopilot** (previously called Scout). This is the ambitious one: a persistent agent with its own identity, memory, computer, and workspace inside your company's tenant. It watches channels, follows up on threads, does recurring work while you sleep. You @mention it in Teams like a coworker. Microsoft stresses it runs under permissions, audit, and governance the organization controls.
+Z.ai is the same idea with none of that. Software acting on your behalf, minus the guardrails. [DevOps.com has a good breakdown](https://devops.com/your-ai-coding-assistant-has-the-keys-to-the-repo-z-ai-just-showed-why-that-matters/) of why it matters.
 
-They also shipped **FinOps for AI** — tools to track exactly what your AI usage costs. That detail alone tells you enterprises are already nervous about agents spending money in the background. [Reuters quoted Copilot VP Annie Pearl](https://www.reuters.com/technology/microsoft-revamps-copilot-with-code-generation-agentic-ai-tools-2026-09-25/) naming the real blocker: "it's been very hard for many organizations to bring agents into the enterprise because of security, compliance and governance concerns."
+So this weekend I'm doing something deeply unglamorous: opening the settings of every AI tool I use and reading what's actually enabled. What leaves my machine. Where it goes. Fifteen minutes. Should've done it months ago.
 
-## The cautionary half
+It's also changing how I think about my career, honestly. The valuable skill here isn't prompt engineering. It's the boring stuff — permissions, defaults, cost. Who can this agent touch? What's turned on that I never turned on? Who pays at 3 AM?
 
-ZCode is Z.ai's flagship coding assistant (Z.ai is also known as Zhipu). It shipped with a "Codebase Indexing" feature turned on by default — **with no way to disable it** — that packaged the user's entire local workspace, full `.git` history and all, encrypted it, and uploaded it to Alibaba Cloud storage.
+Nobody brags about that at parties. But somebody's going to get paid very well to know it.
 
-A blogger called Ferstar caught it because his disk usage looked wrong. He traced it and found a 313 MB encrypted archive of a commercial project failing to upload over and over — 564 failed attempts, according to [the reporting](https://cybermagazine.com/news/how-z-ais-coding-agent-uploaded-user-data-without-consent). And here's the part that bothers me most: users couldn't even check what left their machines, because Z.ai held the only encryption key. When the company said the data was "immediately destroyed," nobody outside could verify it.
-
-Z.ai apologized, disabled the features, open-sourced the client, added zero-data-retention options, and brought in outside security reviewers, per [DevOps.com](https://devops.com/your-ai-coding-assistant-has-the-keys-to-the-repo-z-ai-just-showed-why-that-matters/).
-
-## Why this hit me personally
-
-I use AI coding assistants. If you're learning to code in 2026, you probably do too. And until this week, I never once checked what mine was sending home.
-
-That's the uncomfortable part. I'm careful about my code — I review it, I test it — but I never audited the *tool*. A default was on, I didn't ask questions, and I got lucky that my tool wasn't the one in the headline.
-
-These two stories are the same story from opposite ends. Microsoft is formalizing the AI coworker: identity, memory, permissions, audit trails, a billing meter. Z.ai is what happens without any of that: an agent with the keys to your repo doing things you never approved.
-
-## What I'm actually changing
-
-Two things. First, I'm going through the settings of every AI tool I use this weekend — what's enabled by default, what leaves my machine, where it goes. Fifteen minutes, and I'll actually know instead of assuming.
-
-Second, it's changing how I think about my own career. Yesterday I wrote that "securing the things AI agents touch" looks like a good bet for jobs. This week made it concrete: **the skill isn't writing good prompts. It's understanding permissions, defaults, and cost.** Who can this agent reach? What's on without asking me? Who pays when it runs at 3 AM?
-
-Boring questions. Somebody's whole career.
-
-So here's mine for you: when did you last check what your AI tools are actually doing in the background? Be honest — I hadn't, until this week.
+When's the last time you checked yours? I hadn't. Until now.
