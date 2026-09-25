@@ -1,10 +1,23 @@
+import Image from "next/image";
 import Link from "next/link";
 import { formatDate, type PostMeta } from "@/lib/posts";
 
 export function PostCard({ post }: { post: PostMeta }) {
   return (
-    <article className="group rounded-xl border border-zinc-800 bg-zinc-900/40 p-6 transition-colors hover:border-emerald-500/40 hover:bg-zinc-900/70">
+    <article className="group overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900/40 transition-colors hover:border-emerald-500/40 hover:bg-zinc-900/70">
       <Link href={`/blog/${post.slug}`} className="block">
+        {post.image && (
+          <div className="relative aspect-video w-full overflow-hidden">
+            <Image
+              src={post.image}
+              alt={post.title}
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+            />
+          </div>
+        )}
+        <div className="p-6">
         <h2 className="text-xl font-bold tracking-tight text-zinc-50 group-hover:text-emerald-400 transition-colors">
           {post.title}
         </h2>
@@ -28,6 +41,7 @@ export function PostCard({ post }: { post: PostMeta }) {
               </span>
             </>
           )}
+        </div>
         </div>
       </Link>
     </article>
