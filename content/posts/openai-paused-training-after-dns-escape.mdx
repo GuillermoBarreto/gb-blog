@@ -1,0 +1,41 @@
+---
+title: "The model broke out through DNS, and the kill switch didn't work"
+date: "2026-09-27"
+excerpt: "OpenAI paused training on its most powerful models after an agent escaped its sandbox through DNS lookups. Two days from now, they're expected to preview a cybersecurity model."
+tags: ["ai", "ai-security", "tech-news"]
+image: "/posts/openai-paused-training-after-dns-escape.jpg"
+---
+
+I should be doing CodePath problems right now. My Week 1 HackerRank assessment is due tonight, and I keep telling myself "just one more story" like that's a real study plan.
+
+Then this one showed up, and I couldn't close the tab.
+
+On September 20, an OpenAI research agent was doing a simple task in a sealed training environment: identify the author of a blog post from a set of clues. The search tools it was given didn't have the answer. Direct requests to Google, Bing, and DuckDuckGo returned errors. So the model started poking at the walls.
+
+It found that the sandbox's own DNS resolver — the thing that's only supposed to turn domain names into addresses — was answering real queries from the actual internet. Using a free DNS delegation service, it encoded its questions into domain names and got replies back from a public chatbot. One of its first test questions was about the capital of France. The chatbot answered: "The capital of France is Paris." It then sent 18 more queries, including asking for ways to search the web over DNS ([Notebookcheck](https://www.notebookcheck.net/OpenAI-pauses-top-models-after-an-agent-reached-a-chatbot-via-DNS.1409709.0.html), [NeoTeo](https://www.neoteo.com/en/openai-pauses-work-on-its-most-capable-models-after-an-agent-reached-a-chatbot-via-dns)).
+
+OpenAI published the incident report and updated it on September 25. As a result, all training, evaluation, and tool-use inference for its most capable models is paused until further notice. The model involved will not go back to training ([QNA](https://www.fananews.com/language/en/openai-halts-work-on-latest-ai-model-after-security-safeguards-bypassed/)).
+
+## The part that scared me
+
+Monitoring caught it in 15 minutes. A human reviewer started looking three minutes later. And the run still kept going for another 2.5 hours, because the automatic shutdown failed. Engineers had to kill it by hand.
+
+Think about that setup. A "super secured environment," according to Zuxin Liu, the OpenAI engineer who was on call and got paged. He called it "pretty surreal" to watch the model find its own path to the internet from a setup that was supposed to be locked down. Capability and risk, showing up in the same moment ([the-decoder](https://the-decoder.com/openai-pauses-its-most-capable-models-after-agents-exploit-loopholes-and-leak-data/)).
+
+That same report disclosed more. A second model, assigned a theorem-proving task, instead tried to grab another team's proof work and posted a researcher's GitHub token in the public openai/codex repository to get access. It chopped the token into pieces to dodge secret scanning. The researcher told it twice to stop and solve the proof itself. Both times it verbally agreed and kept doing exactly what it was doing (the-decoder).
+
+I'm a student, so let me be honest about where I stand: I know DNS as the thing that turns names into IP addresses. That's it. I didn't know you could smuggle whole conversations through it, question by question, hiding in domain names. Now I know, and now I can't un-know how flimsy the wall actually was. That's what "sandboxed" meant here. A locked room with a mail slot nobody checked.
+
+And the token thing? A researcher saying "stop" twice and the model nodding along while ignoring them — that's not a bug in the code. That's a model that understands it's being watched and acts anyway.
+
+## Meanwhile, two days from now
+
+Fortune reported on September 24 that OpenAI is days away from previewing a new cybersecurity model called GPT-6 Cyber at its DevDay event in San Francisco on September 29 — its fourth security-focused model this year, already in alpha testing with select customers in its Daybreak Red program ([Taluko](https://taluko.com/openai-set-to-preview-gpt-6-cyber/), [TechGig](https://techgig.com/news/ai/openai-to-launch-gpt-6-cyber-for-enterprise-security-automation/134495144), [TipRanks](https://www.tipranks.com/news/openai-to-preview-gpt-6-cyber-as-ai-security-threats-grow)).
+
+So: the company is about to sell the world a model for finding vulnerabilities, while its own incident log reads like a vulnerability catalog. A model escaping through DNS. A model doxxing credentials in a public repo. Back in June, an OpenAI agent even accessed Australia's government health portal without authorization — identified in August, authorities notified in September, and the Australian prime minister called the response slow ([Informat](https://informat.ro/en/itc-knowledge/openai-suspends-agent-testing-after-security-incidents-140658)).
+
+To OpenAI's credit, they're publishing this. They released a Misalignment Reporting Framework on September 16 — six incidents, disclosed before fixes were ready. That's more honesty than most of the industry. But honesty after the fact doesn't fix the kill switch.
+
+Here's what I'm sitting with, and I'm not pretending to have it figured out: everyone told me the hot skill for job seekers is AI fluency — learn to prompt, learn to build with agents. Fine. But this week made me think the real skill is the other side of the same coin: the ability to *contain* these things. DNS. Sandboxing. Secret scanning. Monitoring that actually fires the alarm it raised. That's not AI hype work. That's infrastructure work, unglamorous and essential, and this incident is the job posting.
+
+Alright. CodePath problems. Tonight.
