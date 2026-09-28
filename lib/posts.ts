@@ -63,7 +63,15 @@ export function getPostsByTag(tag: string): PostMeta[] {
   return getAllPosts().filter((p) => p.tags.includes(tag));
 }
 
+/**
+ * Format an ISO date ("YYYY-MM-DD") as a readable US date.
+ * Always renders in UTC so every reader sees the same calendar day.
+ * Returns "Unknown date" for missing or malformed input instead of "Invalid Date".
+ */
 export function formatDate(isoDate: string): string {
+  if (!isoDate || !/^\d{4}-\d{2}-\d{2}/.test(isoDate.trim())) {
+    return "Unknown date";
+  }
   const [y, m, d] = isoDate.split("-").map(Number);
   return new Date(Date.UTC(y, m - 1, d)).toLocaleDateString("en-US", {
     year: "numeric",
