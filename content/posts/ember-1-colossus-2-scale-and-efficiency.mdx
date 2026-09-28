@@ -1,0 +1,43 @@
+---
+title: "Think less, build bigger"
+date: "2026-09-28"
+excerpt: "Fireworks trained a coding model to waste 40% fewer tokens, and Elon Musk is doubling xAI's Memphis supercomputer toward 1.2 million GPUs by year-end. Same industry, opposite strategies."
+tags: ["ai", "data-centers", "software"]
+image: "/posts/ember-1-colossus-2-scale-and-efficiency.jpg"
+---
+
+I ship code every night. It's my thing. Some nights the coding agent I use sits there "thinking" for a minute straight on a problem I could've Googled in thirty seconds. The answer ends up being three lines. The thinking was a novel.
+
+So when I read about Fireworks' new model this week, I laughed. Someone finally built a model whose whole job is to stop doing that.
+
+## The model that learned to shut up
+
+Ember-1 is built on Moonshot AI's Kimi K3, a strong coding model. Fireworks Research retrained it to keep the quality and cut the thinking. Their claim: about 40% fewer tokens for the same answers ([Fireworks' announcement](https://fireworks.ai/blog/ember-1)).
+
+The detail that sold me: their customers already tried the obvious fix. They turned down the model's reasoning effort setting. It didn't work. Less thinking meant worse answers, which defeats the whole point. So Fireworks had to actually train the model to reason more efficiently instead of trimming it at the API level. That took more than 50 training experiments and over 200 evaluations, plus training algorithms they had to invent along the way ([RuntimeWire](https://runtimewire.com/article/fireworks-ember-1-kimi-k3-reasoning-tokens)).
+
+The token thing matters more than it sounds, by the way. Fireworks says reasoning models like K3 sometimes burn more than 90% of their generated tokens on internal reasoning that nobody ever reads. And it compounds. In multi-turn agent work, every turn replays all that prior reasoning back into the model, so context and cost grow fast ([MarkTechPost](https://www.marktechpost.com/2026/09/28/fireworks-ai-releases-ember-1-a-post-trained-kimi-k3-that-uses-about-40-fewer-tokens/)).
+
+They ran live A/B tests with two production customers on real coding workloads: roughly 35% fewer tokens per task at the same quality. One of those customers already moved it into live production. Fireworks also ran Ember-1 on their own developers' everyday coding work first, and nobody noticed the switch. That's the best review a "same answers, fewer tokens" model can get.
+
+I don't know if 40% holds on every workload. It's vendor-reported, and it's a research preview on Fireworks' own API, no weights released. But the problem is real. When I watched my own agent "think" for a minute last week, that was 90% waste, and I paid for it.
+
+## The building that keeps getting bigger
+
+Now for the opposite strategy.
+
+While one company is teaching a model to think less, Elon Musk is building the biggest thinking machine on the planet. Last Friday he posted xAI's expansion roadmap for Colossus 2 in Memphis. The numbers are honestly hard to picture.
+
+Right now Colossus 2 runs about 110,000 Nvidia GB200 chips and 440,000 of the newer GB300s. That's 550,000 chips ([TradingView](https://in.tradingview.com/news/gurufocus:4118c6ee2094b:0-elon-musk-makes-massive-nvidia-move-at-spacex/)). Musk wants three more batches of 220,000 GB300s online: one this week, one in November, one in December "if we get lucky." All three land and the building holds roughly 1.21 million Nvidia chips by year-end ([CoinCentral](https://coincentral.com/musk-says-colossus-2-data-center-could-double-nvidia-chip-count-by-year-end/)).
+
+The build speed is the crazy part to me. The first Colossus 2 cluster brought 110,000 GB200s and about 210 megawatts of compute online in 91 days. The second cluster, another 220 megawatts, went up in 64 days ([Fudzilla](https://fudzilla.com/musk-stuffs-more-nvidia-kit-into-colossus-2)). I've spent a week debugging a deploy pipeline. These people are commissioning a power plant's worth of compute every two months.
+
+Because power is the real constraint here. Musk didn't say where the power comes from. That's the pattern with every one of these builds: the chips make the announcement, the grid makes the decisions ([Kurums](https://kurums.com/xais-colossus-2-could-double-its-nvidia-chip-count-by-year-end-2026-what-technology-teams-must-watch/)).
+
+## Same problem, two directions
+
+Two strategies, one problem. AI at scale is either too expensive to run or too big to build. Fireworks is solving it from the inside: make the model think cheaper. Musk is solving it from the outside: build so much capacity that cost is someone else's problem.
+
+I know which side I'm on. I'm a software engineering student who pays for his own tools. When a model spends 90% of its output thinking instead of answering, that's not intelligence. That's waste. I'll take the model that shuts up and ships.
+
+But I can't ignore the other number either. If the most aggressive builder in the industry still can't get enough chips and power to feel safe, then efficiency isn't a nice-to-have. It's the only way people who don't own a power plant get to play. People like me.
