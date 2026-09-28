@@ -46,8 +46,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full`}>
       <body className="min-h-full bg-zinc-950 font-sans text-zinc-200 antialiased flex flex-col">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:m-2 focus:rounded focus:bg-emerald-500 focus:px-4 focus:py-2 focus:font-medium focus:text-zinc-950"
+        >
+          Skip to main content
+        </a>
         <Header />
-        <main className="flex-1 w-full">{children}</main>
+        <main id="main-content" className="flex-1 w-full">{children}</main>
         <Footer />
       </body>
     </html>
