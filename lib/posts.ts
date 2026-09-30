@@ -33,6 +33,10 @@ function readPostFile(slug: string): { meta: PostMeta; content: string } {
   return { meta, content };
 }
 
+/**
+ * Read every post under content/posts and return their metadata,
+ * newest first. Returns an empty array when the posts directory is missing.
+ */
 export function getAllPosts(): PostMeta[] {
   if (!fs.existsSync(POSTS_DIR)) return [];
   return fs
