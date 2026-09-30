@@ -10,7 +10,7 @@ export function PostCard({ post }: { post: PostMeta }) {
           <div className="relative w-36 shrink-0 overflow-hidden sm:w-72">
             <Image
               src={post.image}
-              alt={post.title}
+              alt=""
               fill
               sizes="(max-width: 640px) 144px, 288px"
               className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
