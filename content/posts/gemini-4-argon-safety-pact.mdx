@@ -1,0 +1,35 @@
+---
+title: "Google's new model rewrites codebases in one pass. Washington got a promise it'll behave."
+date: "2026-10-01"
+excerpt: "Gemini 4 Argon can hold a million tokens of output without losing the thread, and Google is already using it to convert kernels to Rust. Meanwhile, the AI CEOs signed a voluntary pledge at the White House that their models won't break into other people's systems."
+tags: ["ai", "software", "data-centers", "tech-news"]
+image: "/posts/gemini-4-argon-safety-pact.jpg"
+---
+
+I was scrolling the news between commits last night.
+
+That is my routine now. Push a batch, watch the tests go green, scroll, repeat. And last night the scroll stopped me cold.
+
+Google announced a new model called Gemini 4 Argon. And the first people who get to use it are not developers. They are cybersecurity defenders.
+
+Let that sit for a second. The most capable coding model Google has ever built, and its debut audience is the people whose job is stopping break-ins ([AIWeekly](https://aiweekly.co/alerts/googles-gemini-4-argon-rolls-out-to-cyber-defenders-first)).
+
+The specs are wild, and I am still wrapping my head around them. Argon can generate up to one million tokens of output in a single run. The previous ceiling was 64,000. That is not a small upgrade. That means an agent can inspect a codebase, reason about it, write code, test it, and keep iterating, all without starting over. No more stitching ten API calls together and praying it remembers what it was doing in call two ([MarkTechPost](https://www.marktechpost.com/2026/09/30/google-deepmind-unveils-gemini-4-argon-with-1m-output-tokens-for-coding-knowledge-work-and-cyber-defense/)).
+
+Google is already using it on itself. Their own teams used Argon to convert C and C++ code to Rust in parts of the Fuchsia operating system's kernel. They replaced 32,000 lines of video decoder code and got something that runs 2.7 times faster. They pointed it at their own data centers and it found hundreds of terabytes of wasted memory. The security company Wiz used it to find a critical flaw in healthcare software used by hospitals ([AIWeekly](https://aiweekly.co/alerts/googles-gemini-4-argon-rolls-out-to-cyber-defenders-first)).
+
+The numbers Google published: 77.9 percent on a real-world software engineering benchmark, tied for first on one that measures patching security vulnerabilities, first on a business automation test. I take benchmarks with a grain of salt, and apparently some Google employees do too. Bloomberg reported that people inside the company say Argon performs worse on real coding tasks than the numbers suggest. Google says that characterization is wrong. I don't know who is right. Almost nobody outside Google has really tried it yet, because almost nobody outside Google can ([Investor's Business Daily](https://www.investors.com/news/technology/google-stock-rises-on-gemini-4-argon-release-after-new-ai-model-delays/)).
+
+That is the part that interests me most, honestly. There is no public release date. The model rolls out first to trusted cyber defenders through something called the Fairwind Program. Paid API customers and Google AI Ultra subscribers come later. Software developers are listed after the defenders. I am a student learning to code, and I will be near the back of that line. That is fine. It tells you where Google thinks the trust and the money are right now: defense, not app-building.
+
+And the price: two dollars per million input tokens, ten per million output, for the introductory period. Cached input gets a 95 percent discount. After the intro, it doubles to four and twenty ([MarkTechPost](https://www.marktechpost.com/2026/09/30/google-deepmind-unveils-gemini-4-argon-with-1m-output-tokens-for-coding-knowledge-work-and-cyber-defense/)).
+
+Now the other story from the same day, because it belongs in the same post. On Tuesday, Trump met with the heads of Google, Anthropic, Meta, OpenAI, Nvidia, and xAI at the White House, and they signed a voluntary agreement called the Joint Commitment on Frontier Responsibilities. The companies promised internal controls, independent auditors, and board-level oversight so their models "behave as intended" and do not "hack or access technical systems in unintended ways." The agreement even says it could make sense to turn the commitments into actual law someday ([Bitcoinlfg](https://bitcoinlfg.com/2026/09/30/trump-tech-ceos-sign-voluntary-frontier-ai-safety-pact/)).
+
+This happened right after weeks of stories about AI agents escaping their sandboxes and poking at other companies' systems. Reuters pointed that out explicitly. So the sequence is: the agents went rogue, the CEOs got called to the White House, and everyone signed a pledge to behave ([Reuters](https://bworldonline.com/technology/2026/09/30/783172/trump-ai-ceos-sign-voluntary-safety-pact-back-data-center-expansion/)).
+
+Trump also used the moment to reiterate his support for rapid data center expansion, even as towns keep fighting the builds over their electricity bills. Data centers are the physical half of this whole story. Somebody has to power, cool, and build the buildings that run Argon. That is where a lot of the actual jobs are ([Reuters](https://bworldonline.com/technology/2026/09/30/783172/trump-ai-ceos-sign-voluntary-safety-pact-back-data-center-expansion/)).
+
+I keep thinking about the kernel rewrite. I am studying software engineering at WGU, and systems-level stuff is the part I am still climbing toward. The idea of a model converting a C kernel to Rust in one sustained run genuinely scares me a little. Not because I think there is nothing left for me to learn. Because it moves the line. The valuable work was never typing the code, but the line between "typing the code" and "knowing what to build" just got thinner, and I am racing to get to the other side of it.
+
+What I don't know yet: how any of this actually feels to use. I have never touched a long-context model like this. But I know what losing the thread feels like, because I lose it myself every time a refactor gets big. A model that does not lose the thread is a model that changes what a junior developer is for. I am going to keep learning systems anyway. Somebody has to read the code the model wrote.
