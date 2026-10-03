@@ -1,0 +1,29 @@
+---
+title: "The model is the most replaceable part of your stack"
+date: "2026-10-03"
+excerpt: "GitHub retired four Copilot models yesterday and six more are gone on October 19, while Cloudflare and AWS shipped small open-source models that don't even write text. The lesson I keep landing on: the model is disposable, the plumbing is the skill."
+tags: ["ai", "dev-tools", "tech-news"]
+image: "/posts/models-are-infrastructure-now.jpg"
+---
+
+Last night I sat down for my nightly code session and found out models people have pinned in their Copilot settings are on a kill list. Not someday. Yesterday.
+
+GitHub deprecated four models across all Copilot experiences on October 2: Gemini 3.5 Flash, Gemini 3.6 Flash, Kimi K2.7 Code, and Claude Opus 4.7 ([GitHub Changelog](https://github.blog/changelog/2026-10-02-selected-models-in-github-copilot-deprecated/)). Six more go on October 19, including GPT-5.5, GPT-5.4, and Grok 4.5 ([GitHub Changelog](https://github.blog/changelog/2026-09-18-upcoming-deprecation-of-selected-github-copilot-models-in-mid-october/)). GitHub hands you one suggested replacement per model and says nothing about price.
+
+That last part is the trap. Pondeo lined every swap against GitHub's own rate card and found four swaps get cheaper, four cost the same, and two cost more ([Pondeo](https://pondero.ai/coding/guides/github-copilot-model-deprecation-october-2026/)). Kimi K3 lists at more than three times Kimi K2.7 Code's input price. The new GPT-5.6 models add cache-write billing that the older OpenAI models didn't have. And the Gemini 3.8 Flash price you're switching to? Promotional. It ends December 31. So you can do the whole migration twice if you want.
+
+Old model names hide everywhere: your CLI config, a `COPILOT_MODEL` env var in CI, custom agent profiles with the model in frontmatter. GitHub won't quietly reroute you. Anything on your side that names the model by string is yours to fix.
+
+## The part that got me
+
+The same week, Cloudflare released two open-source models called Clef and Clef-flash that don't generate text at all. You give them a situation and a set of typed questions, and they return a probability for each answer in one pass. Clef-flash answers in a median of 38.8 milliseconds versus 524.1 for the closed Jev model it's designed to replace, both are Apache 2.0 on Hugging Face, and Cloudflare hosts them on Workers AI ([Cloudflare changelog](https://developers.cloudflare.com/changelog/post/2026-10-01-clef-workers-ai/), [MarkTechPost](https://www.marktechpost.com/2026/10/01/cloudflare-releases-clef-and-clef-flash/)). The same day, AWS shipped its own open-source decision model, Strands Decider 2B ([AI Weekly](https://aiweekly.co/alerts/cloudflare-open-sources-clef-beats-jev-latency-on-edge-gpus)).
+
+Put the two stories together and the pattern is obvious. On one side, the big models get swapped like light bulbs: gone, replaced, repriced, gone again. On the other side, the industry is saying don't even use a giant language model for the judgment calls. Use a tiny specialized model that outputs a number your code can act on.
+
+I'm a software engineering student, not an infrastructure engineer. I'll admit I didn't fully appreciate how disposable models are until I read a deprecation notice and thought about how many config files on my own machine name a model by string. But that's the actual skill now. Not knowing which model is best this month. Maintaining the plumbing: the pins, the configs, the rate cards, the changelog habit.
+
+That's honestly encouraging for someone like me applying to IT roles. The half-life of "knowing the hot model" is about six weeks. The half-life of "I can migrate a fleet of configs, check the pricing, and set a reminder before the promo ends" is years. Boring work wins.
+
+Also this week, computer use hit public preview in the Copilot CLI and the Copilot desktop apps ([Pondeo](https://pondero.ai/coding/guides/github-copilot-model-deprecation-october-2026/)). Your coding assistant can now drive your computer. I'll be honest: that scares me more than it excites me. An agent with its own cursor is only as trustworthy as the permissions around it, and we just watched GitHub retire ten models with a two-week notice. The companies moving fastest on agents are not the companies moving fastest on defaults.
+
+I'm going to go check my configs now. And I'm adding a January reminder about that Flash pricing.
