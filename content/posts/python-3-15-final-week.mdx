@@ -1,0 +1,45 @@
+---
+title: "Python 3.15 ships Friday, and AI broke Google's bug bounty"
+date: "2026-10-04"
+excerpt: "Python got a surprise third release candidate this week, so 3.15 final lands October 9. Meanwhile Google froze new bug bounty submissions because maintainers are drowning in AI-generated garbage reports. Both stories are really about the same thing: nobody wants to verify anything anymore."
+tags: ["python", "software-development", "ai-security", "tech-news"]
+image: "/posts/python-3-15-final-week.jpg"
+---
+
+Sunday morning. Coffee, couch, phone. I'm scrolling before church and I see the news: Python 3.15 got a surprise third release candidate this week, and the final release is now scheduled for October 9. That's five days from now.
+
+The part that got me is personal. I'm a WGU software engineering student with a Python assessment that's been sitting overdue and unattempted. I've been putting it off. And while I've been putting it off, the language itself went and shipped another whole version. It feels like it's moving under my feet.
+
+I haven't used any of the new 3.15 features. I'll admit that straight up. But I read the release notes anyway, because I want to understand how a release this big actually gets made.
+
+## What actually happened
+
+Python 3.15 was supposed to ship this past week. Instead, release manager Hugo van Kemenade [announced 3.15.0rc3 on the Python Insider blog](https://blog.python.org/2026/10/python-3150-rc3/) on October 2. They found last-minute lazy-import blockers and decided the final needed more testing time. So they pushed the final to October 9 and put out an extra candidate.
+
+[Van Kemenade called it "recent tradition"](https://discuss.python.org/t/python-3-15-following-tradition-lets-have-a-surprise-rc3/109313). Which is a funny way of saying: this team would rather be a week late than ship a broken language.
+
+The release candidate packs around 156 bugfixes and improvements from 82 contributors since rc2, and there will be no ABI changes from here on. That last detail matters for library maintainers: any binary wheels built against this RC will work with the final, so the Python team is [calling on maintainers to test now and publish 3.15 wheels](https://www.linuxcompatible.org/story/python-3150rc3-release-candidate-announced-stable-release-set-for-october-9-2026/).
+
+The headline features: explicit lazy imports (a new `lazy import` soft keyword that defers loading a module until you actually use it), two new built-in types (`frozendict` and `sentinel`), UTF-8 as the default encoding, unpacking inside comprehensions, a Tachyon sampling profiler, and a much bigger experimental JIT compiler.
+
+## Meanwhile, Google hit the brakes on its bug bounty
+
+Effective October 1, Google stopped accepting new product vulnerability reports through its Open Source Software Vulnerability Reward Program. The reason, per Tom's Hardware reporting [picked up by Techmeme](https://wesearch.press/s/google-freezes-product-flaw-submissions-to-its-oss-vulnerabi-e80b2ce0): an influx of invalid AI-generated reports. Maintainers were getting buried in submissions with hallucinated exploit paths and coding errors that had no actual security impact.
+
+Google says it'll share an update on the program's future by Q1 2027. Filings from before October 1 are still being processed, supply chain submissions are unaffected, and some Google Cloud repos can still take product bugs through the Cloud VRP. But the route most people used is gone for now.
+
+This didn't come out of nowhere. Back in March, Google had already tightened the rules, requiring stronger proof (like OSS-Fuzz reproductions or merged patches) to filter out low-quality reports. That slowed the flood but didn't stop it. So now the whole thing is frozen.
+
+## What I'd actually take from this week
+
+These two stories are the same story told from opposite ends.
+
+The Python team delayed a major release by a week because a feature needed more testing. That's old-school, boring, mature release engineering. Ship later, ship right.
+
+The Google side is the opposite. Everyone can now generate vulnerability reports with AI, so thousands of people did, and almost nobody verified anything before hitting submit. The triage teams spent their time rejecting hallucinations instead of fixing real bugs. So the program that paid people to find real flaws got killed by the program's own free-for-all.
+
+Here's what scares me a little: generating stuff is free now. Code, bug reports, job applications, whatever. Verifying stuff is still expensive. And verification is the part that keeps getting skipped.
+
+For me, as someone applying to IT roles, that's actually the opening. Everybody is learning to produce. Almost nobody is learning to check. The scarce skills in these two stories are the same: testing a release candidate before it ships, and reproducing a vulnerability before you report it. Repro, triage, verification. That's what Google's maintainers were drowning for lack of.
+
+One concrete thing I'm taking from this: the Python team's call to action was aimed at library maintainers, but anyone can test an RC. I code every night. Tonight I can download 3.15.0rc3, run my practice scripts against it, and see what breaks. That's a real contribution to a real release. My D335 isn't getting any less overdue, and the least I can do is test the thing they're telling everyone to test.
