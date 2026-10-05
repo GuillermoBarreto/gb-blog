@@ -1,0 +1,41 @@
+---
+title: "AI is leaving the cloud"
+date: "2026-10-05"
+excerpt: "NVIDIA wants a $4,999 AI box on your desk. Palantir wants a data center in a shipping container that governments own outright. Same week, same message: stop renting."
+tags: ["ai", "data-centers", "tech-news"]
+image: "/posts/ai-is-leaving-the-cloud.jpg"
+---
+
+Most nights I code after work. Commits go up late, usually while my laptop fan is doing its best impression of a jet engine.
+
+This week I kept thinking about that fan. Two stories landed within a day of each other, and they're about the same thing. AI is leaving the cloud.
+
+On October 2, NVIDIA announced a 64GB version of its DGX Spark desktop. It starts at $4,999 and goes on sale Friday, October 23, through Acer, ASUS, Dell, Gigabyte, HP, and MSI ([NVIDIA](https://blogs.nvidia.com/blog/local-ai-dgx-spark-64gb-sync/)). Same GB10 Grace Blackwell chip and same NVIDIA software stack as the bigger 128GB model, which reportedly jumped in price to $6,950 ([Cryptonomist](https://en.cryptonomist.ch/2026/10/02/nvidia-dgx-spark-ai/)).
+
+For five grand, you get a machine that NVIDIA says can run models up to 100 billion parameters entirely on your desk. No cloud bill. Your data never leaves the room. It ships with NVIDIA's Agent Toolkit, their CUDA-X libraries, and their Nemotron open models, and it runs Ollama, vLLM, and PyTorch from the start ([The Digginator](https://thedigginator.com/nvidia-dgx-spark-64gb/)). If one isn't enough, you can link two together into a 128GB cluster without reconfiguring everything.
+
+The pitch is pretty clear. Keep a coding agent running around the clock on your own hardware. Let the box handle inference while your laptop does laptop things. NVIDIA is betting that developers want the model in the room, not behind an API key.
+
+The day before that, on October 1, Palantir announced it was naming a startup called Armada its inaugural certified modular data center partner ([Business Wire](https://www.businesswire.com/news/home/20261001185115/en/Palantir-and-Armada-Partner-to-Accelerate-Sovereign-AI-Infrastructure)).
+
+That's a mouthful of a sentence. What it means is simpler. Armada builds data centers that fit in shipping containers. Compute, storage, networking, power, and cooling, all in the box. They're manufactured in the US and allied countries. And they can be deployed in months, wherever power already exists, instead of the years a normal data center takes ([Morningstar](https://www.morningstar.com/news/business-wire/20261001185115/palantir-and-armada-partner-to-accelerate-sovereign-ai-infrastructure)).
+
+The software side is the part that matters. Armada's platform takes open-source models, including NVIDIA's Nemotron, and sets them up for fine-tuning and inference on hardware the customer owns outright. No external cloud involved. The whole thing can run fully air-gapped. And their Sovereign AI Grid links multiple deployments together so nothing depends on a single site.
+
+Palantir's CEO, Alex Karp, put it bluntly: "Sovereignty is not something you rent. It is owning the weights, the data, and the hardware those models run on, and knowing where that hardware was built."
+
+The context: Palantir's government customers have been asking for exactly this. AI that stays inside their own security boundary, on their own machines, not rented from a cloud provider in another jurisdiction.
+
+Same week. Same idea, two sizes. A $4,999 box for your desk. A shipping container for a government. Both saying the rental model has limits, and a lot of serious people are done renting.
+
+I won't pretend a DGX Spark is in my budget. Five grand is five grand. But I don't think the point is the box. The point is the direction.
+
+I'm applying to IT jobs while I finish my degree. I read the listings the way some people read box scores. And here's what I keep seeing: everyone wants someone who can make computers do things on the internet. Almost nobody lists "keep the AI running when the internet is gone." But that's what this stuff is. Air-gapped deployments. On-prem clusters. Hardware you can touch. Someone has to rack these things, network them, secure them, update them. That person has a job that doesn't fit in an API call.
+
+I've never racked a server. I've never run anything air-gapped. Most of what I know about networking came from coursework and breaking my own home setup. I'm not going to pretend otherwise.
+
+But I can see the shape of it. This is the third time in a few weeks this blog has landed on the same conclusion from a different angle. The skills that survive are the boring ones. Testing. Verification. And now: knowing how the hardware actually works and keeping it running when it isn't somebody else's cloud.
+
+The cloud was supposed to kill on-prem. Then AI got too big for the cloud's pricing, too sensitive for the cloud's security model, and too hungry for the cloud's power grid. So it's coming back down to earth. Onto desks. Into shipping containers. Into rooms with their own locks on the doors.
+
+I'll be watching. From my laptop. Fan and all.
