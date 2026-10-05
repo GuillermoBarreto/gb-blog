@@ -77,7 +77,16 @@ export function formatDate(isoDate: string): string {
     return "Unknown date";
   }
   const [y, m, d] = isoDate.split("-").map(Number);
-  return new Date(Date.UTC(y, m - 1, d)).toLocaleDateString("en-US", {
+  if (m < 1 || m > 12 || d < 1 || d > 31) {
+    return "Unknown date";
+  }
+  const date = new Date(Date.UTC(y, m - 1, d));
+  // Date.UTC rolls overflows into the next month (2026-02-30 becomes
+  // 2026-03-02); reject those instead of showing a wrong date.
+  if (date.getUTCMonth() !== m - 1 || date.getUTCDate() !== d) {
+    return "Unknown date";
+  }
+  return date.toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
     day: "numeric",
