@@ -39,12 +39,17 @@ function readPostFile(slug: string): { meta: PostMeta; content: string } {
  */
 export function getAllPosts(): PostMeta[] {
   if (!fs.existsSync(POSTS_DIR)) return [];
-  return fs
-    .readdirSync(POSTS_DIR)
-    .filter((f) => f.endsWith(".mdx"))
-    .map((f) => f.replace(/\.mdx$/, ""))
-    .map((slug) => readPostFile(slug).meta)
-    .sort((a, b) => (a.date < b.date ? 1 : -1));
+  const metas: PostMeta[] = [];
+  for (const file of fs.readdirSync(POSTS_DIR).filter((f) => f.endsWith(".mdx"))) {
+    const slug = file.replace(/\.mdx$/, "");
+    try {
+      metas.push(readPostFile(slug).meta);
+    } catch (error) {
+      // One post with malformed frontmatter must not take down the whole blog.
+      console.warn(`Skipping unreadable post "${slug}":`, error);
+    }
+  }
+  return metas.sort((a, b) => (a.date < b.date ? 1 : -1));
 }
 
 export function getPostBySlug(slug: string): { meta: PostMeta; content: string } {
