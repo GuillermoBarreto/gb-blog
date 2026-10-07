@@ -17,7 +17,7 @@ export function Header() {
         >
           {SITE_NAME}
         </Link>
-        <nav className="flex items-center gap-1 sm:gap-2">
+        <nav aria-label="Primary" className="flex items-center gap-1 sm:gap-2">
           {NAV.map((item) => (
             <Link
               key={item.href}
