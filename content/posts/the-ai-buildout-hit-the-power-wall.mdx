@@ -1,0 +1,41 @@
+---
+title: "The AI boom ran out of electricity"
+date: "2026-10-07"
+excerpt: "Two companies just admitted the truth out loud: the bottleneck isn't chips or models, it's power. So they're stitching old buildings together with fiber and bringing their own power plants."
+tags: ["ai", "data-centers", "tech-news"]
+image: "/posts/the-ai-buildout-hit-the-power-wall.jpg"
+---
+
+I was up late last night pushing my commit — the nightly streak lives on — and I caught myself reading data center news like it's sports scores. A year ago I couldn't have told you what a transformer does. Now I'm reading about them every week.
+
+This week the industry said something out loud that finally made me pay attention.
+
+The chips aren't the problem anymore. Electricity is.
+
+Two stories, same week, same admission.
+
+First: WhiteFiber announced something called Continuum. They took two data centers 83 kilometers apart and made them behave like one single GPU cluster. 136 terabits per second between them, 0.9 milliseconds of round-trip latency, running over 12 strands of dark fiber, with DriveNets handling the network fabric and WEKA's NeuralMesh handling storage. One logical supercluster built out of two buildings. ([Datacenter News](https://datacenter.news/story/whitefibre-launches-cross-data-centre-ai-supercluster), [The Data Center Engineer](https://thedatacenterengineer.com/news/whitefiber-continuum-links-two-data-centers-into-one-136-tbps-gpu-supercluster/))
+
+Why does that matter? Because nobody wants to build a new giant data center campus anymore. Too slow. Too much permitting. Too much fighting with the power company. I wrote last week about Cave City, Kentucky, where a town is literally in court trying to stop one. So WhiteFiber's pitch is: don't build. Stitch together the facilities that already have power and fiber, and call it one machine.
+
+Sit with that for a second. Two buildings, 83 kilometers apart, and the GPU doesn't care.
+
+Second: Delta showed up at Data Center World Asia with a prefabricated AI data center built for NVIDIA's Vera Rubin chips. 800-volt DC power right at the rack, 660 kilowatts of output at up to 98% efficiency, liquid cooling, even a cold plate designed specifically for the NVL72 racks. There's a container version that crams 60 kilowatts per rack into the footprint of a single parking space and hits a PUE of 1.19. ([Entelechy Asia](https://entelechyasia.com/2026/09/29/delta-debuts-800vdc-ai-data-centre-architecture-for-nvidia-vera-rubin/), [Delta](https://www.deltathailand.com/en/products-services-detail/10/239/Delta-Unveils-AI-Modular-Data-Center-800-VDC-and-Microgrid-Solutions-at-DCW-ASIA2026))
+
+But the part that got me wasn't the container. It was the microgrid.
+
+Delta is selling the power plant with the data center. Renewables, battery storage, solid oxide fuel cells, solid-state transformers, all bundled so the building doesn't have to wait for the grid to catch up. They call it "Grid-to-Chip."
+
+Read that again. The biggest growth industry on the planet now ships with its own power supply because the actual grid can't keep up.
+
+I'm a software guy. My whole plan is to get hired writing code. I know basically nothing about electrical engineering. Three-phase power, busbars, load balancing at the physical layer — all of it is a foreign language to me. I'll admit that straight up.
+
+But the signal is getting too loud to ignore. Every story in this space is really about the same three things now: power, cooling, and fiber. The models keep getting cheaper and more interchangeable — I've written about that enough that it's basically the theme of this blog — and all the scarce stuff is physical. Nobody's bottlenecked on parameters. They're bottlenecked on megawatts.
+
+That scares me a little, honestly. Not because I'm worried about the industry. It'll figure it out. It scares me because I keep applying to IT roles with a resume that says "software" and the job market keeps whispering "electrician." Not literally. But close enough that I'm thinking about it.
+
+Here's the good part, though. Power, cooling, and fiber are things you can actually learn. Nobody needs you to have invented the transformer. They need people who can rack, network, monitor, and keep the whole thing cool and powered. That's a training problem, not a genius problem. That's the kind of job a WGU student who ships code every night could plausibly grow into.
+
+So. The AI boom hit the power wall, and the industry's answer is basically: go around it. Stitch the old buildings together. Bring your own electricity. Stop waiting.
+
+I should probably learn what a busbar is.
