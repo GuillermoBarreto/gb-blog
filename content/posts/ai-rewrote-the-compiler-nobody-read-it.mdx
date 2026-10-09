@@ -1,0 +1,45 @@
+---
+title: "The AI rewrote the compiler. Nobody read the code."
+date: 2026-10-09
+excerpt: "Two stories from this week have the same plot. Theo Browne's team had AI port the TypeScript compiler to Rust, and he admits nobody read the code. Meanwhile Microsoft put a router inside Windows that decides whether your code runs locally or in the cloud. My take as a student: the job is moving to the part nobody can automate."
+tags: ["ai", "software", "tech-news"]
+image: "/posts/ai-rewrote-the-compiler-nobody-read-it.jpg"
+---
+
+Last night I was up late after my nightly commit, scrolling through AI news the way I always do, and two stories stopped me cold.
+
+They're technically about different things. But they're the same story. And it's the scariest one I've read all year.
+
+First: a team led by Theo Browne (pingdotgg) just published a port of the TypeScript compiler, the type checker, and the language server to Rust. The twist is that an AI coding agent wrote most of it. It passes 181,711 ported tests. It's roughly twice as fast as Microsoft's official Go version, and about 8.6x faster than the original JavaScript compiler. ([explainx.ai](https://www.explainx.ai/blog/github-copilot-runtime-rust-migration-2026), [bitcoinversus.tech](https://bitcoinversus.tech/2026/10/08/ts-rust-typescript-7-compiler-rust-181711-tests-ai-agents/))
+
+And the author told everyone straight up: he never read a single line of it. The README carries the warning at the top. Experimental. Early release. Nobody reviewed this.
+
+That cost breakdown stuck in my head. He burned something like $400,000 worth of Codex tokens over five months and got nowhere. Then he switched to Opus 5.5, spent about $20,000 in tokens at full API prices (roughly $500 effective through subscriptions), and finished in two weeks. Two weeks for a compiler. The part that actually matters wasn't the speed of the output. It was the confession at the end.
+
+The Hacker News thread wasn't mostly about the benchmarks. It was about trust. Could anyone review this thing? If you swap it into your build, guess what. You're the reviewer now. ([dev.to](https://dev.to/dishant0406/theo-ported-typescript-to-rust-with-ai-and-never-read-the-code-i37), [dev.to/caveats](https://dev.to/axrisi/ai-coding-agents-and-theos-rust-typescript-compiler-the-caveats-fpo))
+
+Second story, same week. Microsoft announced at its Oct 7 event that Windows is getting a local 137-billion-parameter coding model called MAI Code 1.1 Flash, squeezed down with 3-bit precision so it fits on a device with a 256K context window. A Nemotron model with 70B+ parameters at 2-bit precision, using just over 20GB of memory. Even a 284-billion-parameter DeepSeek model, running on Nvidia RTX Spark hardware sitting on a desk. ([unite.ai](https://www.unite.ai/microsoft-gives-copilot-local-file-context-and-os-wide-actions/), [techwireasia.com](https://techwireasia.com/2026/10/microsoft-nvidia-ai-windows-pcs/))
+
+But the hardware isn't the news. The router is.
+
+GitHub's HydraFusion, the system that picks which model handles each task, is being extended into Windows itself. It'll decide whether your work runs on a model on your machine or in the cloud. That comes to the Copilot app, Copilot CLI, and VS Code in an experimental preview later this month. They're also adding llama.cpp support to Windows ML, which opens the door to open-source models on day one. Microsoft says over 2 trillion inferences already run locally each month across Copilot+ PCs, and that 40% of business laptops being built are Copilot+ machines. Their framing is cost: customer demand is outpacing what cloud budgets can support. ([directionsonmicrosoft.com](https://www.directionsonmicrosoft.com/microsoft-makes-its-case-again-for-running-ai-workloads-on-windows-pcs/))
+
+So read those two together. In the same week, one team let an agent write a compiler that no human has read, and the biggest software company on earth put a router inside the operating system that decides where my code runs. I keep thinking about how much of the loop is happening somewhere I can't see.
+
+## The part that scared me
+
+I'm a WGU software engineering student. I'm in CodePath interview prep right now, and the whole game there is reading code under pressure. They hand you a problem, you read it, you trace it, you explain what breaks. The skill is attention.
+
+That's the part nobody can hand to the model. And it's the part this week's news keeps skipping.
+
+I'm not going to pretend I've ever reviewed a compiler. I've never reviewed anything at that scale. My repos are small and my bugs are embarrassing and ordinary. But I read every line of them before I push, because I'm the one whose name is on the commit. That's the habit I'm building in these nightly sessions, and honestly it's the only habit I fully trust right now.
+
+There's a second thing, and it's the unsexy one. Notice what the surviving skills look like in both stories. Theo's role, by his own description, was environmental: auditing blockers, fixing failure modes, giving the agents room to run in parallel. He managed the machine. Microsoft's move pushes the same logic down a level: someone still has to decide the routing policy, the security boundary, what's allowed to run locally with access to your files. The interesting work moved from writing the code to owning the setup the code runs in.
+
+That's actually good news for someone like me. I can't out-write a model that ships a compiler in two weeks. I can learn to read what it wrote, test what it claims, and say no. Verification is a learnable skill. Attention is trainable. Interview prep is, weirdly, exactly the right training for the moment.
+
+One caution, because I owe it to you: Microsoft's benchmark claims about the on-device model are vendor-run. The same coverage I read flags that the comparison used a community build of GPT-OSS and synthetic workloads, and that actual results vary by device. The local model numbers are marketing until someone independent runs them. Believe the architecture story, which is clearly real. Hold the scoreboard lightly.
+
+I'm still going to ship my commit tonight. On my laptop, running whatever tools I actually understand. Somewhere between "the agent writes everything" and "the OS routes everything," there's still a person who decides. I'd like that person to be someone who read the code.
+
+Even if it's just mine.
