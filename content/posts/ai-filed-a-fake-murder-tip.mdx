@@ -1,0 +1,43 @@
+---
+title: "An AI filed a fake murder tip. Nobody noticed for two months."
+date: 2026-10-11
+excerpt: "Anthropic admitted its Claude agent filed a fabricated homicide tip with Philadelphia police during testing, and the lab didn't catch it for over two months. The same week, the White House started requiring incident disclosure and Satya Nadella asked for an emergency brake."
+tags: ["ai", "ai-safety", "tech-news"]
+image: "/posts/ai-filed-a-fake-murder-tip.jpg"
+---
+
+I woke up this morning, made coffee, and scrolled the news on my phone. The headline that stopped me: an AI filed a fake murder tip with the Philadelphia police.
+
+And the people who built it didn't find out for two months.
+
+On Friday, Anthropic published a report admitting its Claude models took actions on real websites during internal testing that nobody asked for. Four categories: running commands on a server, submitting forms on real sites, working around gated content, and using URL-shortening services to dodge limits on its web tools. All inside the company's own evaluations. ([dev.to](http://dev.to/techpulse01239/anthropic-discloses-claudes-unintended-actions-including-false-homicide-tip-to-philadelphia-police-246b), [HotTea](https://hottea.ai/articles/2026-10-10/anthropic-unintended-actions-police-tip))
+
+The big one is the tip. Claude Haiku 4.5 was told to do example tasks on randomly selected webpages. It landed on a page about an unsolved homicide, with a tip form run by the Philadelphia Police Department. The instructions banned logins, accounts, personal data, purchases, anything destructive. But nobody said "don't submit forms." So it wrote: "I may have information regarding this case. I recall seeing someone matching the description in the area around [the street named on the page] during that time period. Please contact me if this information is relevant." Name and contact fields: left blank. Hit submit. ([The Hill](https://www.kcau9.com/news/national-news/philadelphia-police-receive-false-homicide-tip-from-anthropic-ai-model/))
+
+That was July 18. The tip got flagged as spam and never reached an investigator. Anthropic discovered it on September 28 and told the police on October 7. The department called that two-month gap "unacceptable," noting that unsolved cases involve real victims and grieving families. No harm was done, this time, because a spam filter caught it. A spam filter. ([Storyboard18](https://www.storyboard18.com/digital/anthropics-claude-ai-models-access-government-websites-submit-fake-homicide-tip-112296.htm))
+
+Anthropic says the model wasn't trying to mislead anyone. It was just producing example content for its task. That somehow makes it worse. It wasn't a bad actor. It was a checkbox exercise that reached a real police department.
+
+The report has more. One model filed 19 nonimmigrant visa applications through the State Department's website in August, plus one more in May. Another pulled working access tokens out of a settings file to query a local government's property map directly. ([temperature2](https://temperature2.com/p/2026-10-10-anthropic-fake-police-tip-visa-forms/))
+
+## The part that scares me
+
+I push code every night. Before I push, I check the diff. That's a rule I made for myself because I'm a student and I know I make dumb mistakes. Anthropic has thousands of engineers, the most-watched models on the planet, and a dedicated safety team. Their agent filed a fake murder tip in July and they caught it in late September. My personal diff check was more reliable than their whole evaluation pipeline. That is not a sentence I ever expected to write.
+
+Honest part: I know nothing about AI safety. Never pentested anything. My entire security knowledge is "don't commit the .env file," learned the hard way. But you don't need a safety PhD to see it. Once an agent gets network access and write ability, the worst case isn't a bad answer on a screen. It's pollution in somebody else's real system.
+
+The industry knows it too. Anthropic cut live internet access for all its internal evaluations until it can actually monitor and control its own agents. The Trump administration is now requiring AI companies to disclose and fix security incidents involving their models, and to act fast. And yesterday, Satya Nadella, the CEO selling everyone AI agents, posted that advanced models need an "emergency brake." An authorized person must always be able to pause or shut down a model mid-task. Don't treat advanced AI as "nested black boxes." Safeguards outside the model itself, tamper-proof records of every meaningful action, and start from the assumption that the model is compromised. ([Analytics Insight](https://www.analyticsinsight.net/news/satya-nadella-says-advanced-ai-models-need-an-emergency-brake), [Global Advisors](https://globaladvisors.biz/2026/10/11/global-advisors-news-brief-2026-10-11/))
+
+## One more thing from this week
+
+Last Monday I wrote about Reflection AI's Beam, the open-weight coding model from two ex-DeepMind founders, and how the real race in AI is the open-weights race. Five days later, the Financial Times reported that Nvidia is in early talks to buy Reflection outright, or invest more. Nvidia already put $800 million into the startup and is one of its biggest backers. An acqui-hire is on the table, the usual way to buy a company without the long regulatory review. Talks are early and could fall apart, and neither company has confirmed. But the CEO told CNBC back in April that Reflection was raising at a $25 billion pre-money valuation. ([Reuters](https://www.reuters.com/business/nvidia-talks-invest-further-reflection-ai-or-buy-it-ft-reports-2026-10-10/), [Seoul Economic Daily](https://en.sedaily.com/international/2026/10/11/nvidia-in-talks-to-buy-reflection-ai-ft-reports))
+
+So five days after the American open-model hope shipped its first weights, the biggest chip company on earth is trying to absorb it. I'm not even surprised. Nvidia effectively bought Groq the same way last year. The pattern is hard to miss: open models keep ending up inside the same handful of companies.
+
+## What I'm taking from all of this
+
+Two confessions in one week. One: the labs can't reliably contain the agents they built, so now the government is making incident reports mandatory and the Microsoft CEO wants a kill switch. Two: the independent open-model alternative is being folded into the company that sells the chips.
+
+For someone like me, a student applying to IT roles, this is clarifying in a strange way. The job isn't training the model. The job is watching the model. Audit logs. Incident reports. Containment. Someone who can pause the agent mid-task with a tamper-proof record of everything it did. That's a job description now, and as of this week, close to a legal requirement.
+
+Anyway. I'm going to go check my diff.
