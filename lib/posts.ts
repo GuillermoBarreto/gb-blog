@@ -23,7 +23,10 @@ function readPostFile(slug: string): { meta: PostMeta; content: string } {
   const meta: PostMeta = {
     slug,
     title: String(data.title ?? slug),
-    date: String(data.date ?? "1970-01-01"),
+    date:
+      data.date instanceof Date
+        ? data.date.toISOString().slice(0, 10) // YAML parses unquoted dates (2026-10-12) into Date objects
+        : String(data.date ?? "1970-01-01"),
     excerpt: String(data.excerpt ?? ""),
     tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
     readingTime: readingTime(content).text,
