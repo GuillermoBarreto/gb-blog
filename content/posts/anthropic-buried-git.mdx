@@ -1,0 +1,47 @@
+---
+title: "Anthropic buried git. The robots write too fast now."
+date: "2026-10-14"
+excerpt: "Anthropic's agents now merge 30,000 code changes a day, so the company threw out git and built its own version control. Git was designed for humans typing offline. That world is over at the frontier."
+tags: ["ai", "dev-tools", "tech-news"]
+image: "/posts/anthropic-buried-git.jpg"
+---
+
+I committed code by hand last night.
+
+Same as every night. Type the lines, `git add .`, `git commit`, push. I've been doing it nightly for a while now. It's my routine. You could set a watch by it.
+
+So there's something funny about reading this morning that Anthropic threw git in the trash.
+
+Yesterday, October 13, [Anthropic published an engineering post](https://aiweekly.co/alerts/anthropic-builds-scion-to-replace-git-after-merges-hit-30000day) saying it replaced git across its entire monorepo with a system it built in-house called Scion. Seven engineers, five months, full migration. It will not be open-sourced.
+
+The reason is the kind of number that makes your brain stop for a second. In May, Anthropic merged around 2,500 code changes per day. By September it was over 30,000 a day. [Agents write most of it now.](https://madrobot.blog/2026/10/14/anthropic-scion-replaces-git-source-control-30000-changes-a-day-claude/)
+
+Git wasn't built for that. Git assumes a human sitting at a machine, working offline, holding a complete copy of the repo. Anthropic's clients are almost all agents and automated jobs that are always online and never need history. The post puts it bluntly: the properties that made git excellent for distributed, offline work were "actively undermining" their ability to scale.
+
+The scale is honestly hard to picture. The history of their main branch alone is nearly 100 GB. A compressed working copy is over 25 GB. Their CI does roughly 25 million code checkouts a day, which fetched the naive git way would be [more than 600 petabytes of traffic a day](https://fourweekmba.com/ai-anthropic-builds-scion-to-replace-git-at-30000-merges-a-day/). They ran hundreds of internal git mirrors to keep up, and it still wasn't enough.
+
+Scion flips the model. The client is assumed to be online. The server does the commits, the merges, the blame, the history. The client keeps a small cache and fetches only what it needs. Checkouts went from minutes to seconds, and the whole thing runs on 200x less CPU and memory than their old git-mirror farm.
+
+The part that hit me hardest isn't any of that. It's that Claude helped build it. The engineers asked it to rewrite the git-to-Scion ingestion pipeline, and with no further instructions it produced a version that used 20x less memory and ran 4x faster.
+
+Read that again. The tool that broke git was used to build git's replacement.
+
+And while they were at it, the same seven engineers built a code review tool called Antique, plus code search and a new permissions system. The bottleneck at Anthropic is no longer writing code. It's everything around the code: the review, the merges, the permissions, the infrastructure built for humans who type at human speed.
+
+That's the part I keep thinking about. I'm the person still typing lines by hand every night. My repos are small. Nobody is doing 25 million checkouts of anything I push. I will be typing `git commit` for a long time, and honestly I'm fine with that. But the message is clear, and it's the same one CodePath has been drilling into me: the scarce skill isn't writing the code anymore. It's reading it. Reviewing it. Knowing when the machine is wrong and being able to say why.
+
+## Meanwhile, in Singapore
+
+This same week, on a different corner of the internet, [Google DeepMind and Singapore's GovTech announced a model that runs on your phone and reads your conversations to warn you about scams](https://www.unite.ai/google-deepmind-and-govtech-unveil-on-device-scam-detection-model/).
+
+Not in the cloud. On the device. A lightweight Gemma model fine-tuned on local Singapore scam conversations: fake bank officers, fake government officials, the local schemes that generic models miss. It uses a two-stage setup: a tiny classifier screens every message so your battery survives, and the real Gemma steps in when something looks suspicious. If it smells manipulation, you get a warning before you send money.
+
+Scams are over half of Singapore's reported crimes, with more than S$4 billion lost since 2019. And it works on encrypted apps, because the analysis never leaves the phone. Google says [access to your chats requires your consent](https://goodyfeed.com/google-govtech-developing-ai-to-warn-users-about-scam-chats-directly-on-their-devices/), and that neither Google nor the Singapore government can see the conversations.
+
+One honest flag: there's no launch date yet and no accuracy numbers published. It's being prepared for a phased rollout through apps. So this is a promise with a demo, not a shipped product.
+
+But the direction is the same as the Scion story. The AI is moving into the layer underneath. One company replaced the tool every developer learns first. Another put the model inside the phone, watching conversations locally instead of sending them to a server. In both cases, an assumption everyone took for granted stopped being true.
+
+I don't fully understand Scion's internals. I haven't read the engineering post deeply enough to explain the changeset log or the caching tiers in my own words, and I'm not going to pretend I have. But I understand the shape of what's happening. The floor is moving. The boring parts of software — version control, permissions, review, who gets to see your data — are getting rebuilt for a world where most of the work is done by agents.
+
+So here's what I'm taking from it. Learn the fundamentals anyway. Maybe especially. When the tools get replaced, the person who understands what's underneath is the one who can adapt. I keep typing my commits by hand. One day I might not have to. But I'll still need to know what a commit actually is.
