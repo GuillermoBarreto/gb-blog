@@ -1,0 +1,29 @@
+---
+title: "AI's power problem got a shock absorber"
+date: "2026-10-15"
+excerpt: "Getting electricity to AI data centers was already the bottleneck. Now there's a bottleneck inside the bottleneck: thousands of GPUs swinging megawatt loads in milliseconds, so Siemens is selling electrical shock absorbers — while one Singapore developer just crossed a gigawatt of billings."
+tags: ["ai", "data-centers", "tech-news"]
+image: "/posts/shock-absorbers-for-ai-power.jpg"
+---
+
+Last night I was pushing a commit and my laptop was plugged in. Charger warm. Boring. The most boring part of computing is the power cable, right?
+
+Then this morning I read two stories and the power cable turned out to be the whole story.
+
+First: Siemens just [doubled down on a company called Skeleton Technologies](https://engtechnica.com/siemens-invests-in-skeleton-tech-partners-on-data-center-power-systems/) — a strategic investment plus an exclusive global partnership to sell Skeleton's supercapacitors to data centers. Skeleton makes what is basically an electrical shock absorber. Here's the problem it solves: in an AI training cluster, thousands of processors change state within milliseconds, and that adds up to [power swings at the megawatt scale, over and over](https://www.tndindia.com/siemens-expands-its-data-center-portfolio-invests-in-skeleton-technologies/). Imagine ten thousand laptop chargers flickering on and off every few milliseconds. That's what the grid sees when a big training run starts, stops, starts again.
+
+Skeleton's answer is supercapacitors sitting in the power path that absorb the spikes and release the power back smoothly. Siemens' Smart Infrastructure president said the quiet part: "the race to scale AI is increasingly becoming a race for energy." The deal pushes Skeleton [past a $1 billion valuation](https://www.europesays.com/germany/109615/), with more than $200M planned for US manufacturing. At this week's OCP Global Summit the two showed a validated [600 kW, 800 VDC sidecar power rack design](https://bitcoinversus.tech/2026/10/14/siemens-skeleton-ai-data-center-power/) built around open DC power standards — the point being that operators shouldn't have to massively overbuild their upstream electrical gear just to survive the swings.
+
+Second story, same day: Singapore data center developer DayOne [crossed 1 gigawatt of billings](https://www.reuters.com/world/asia-pacific/singapore-data-centre-developer-dayones-billings-surpass-1-gigawatt-2026-10-14/) — customer contracts for IT power capacity, up eightfold in under two years from 121 MW at the end of 2024. Bookings are already at 2.3 GW. And a seven-bank consortium just upsized DayOne's financing for its Malaysia expansion in Johor to [$7.2 billion](https://www.morningstar.com/news/pr-newswire/20261014hk72021/dayone-upsizes-malaysia-financing-to-us72-billion-total-billings-surpass-1gw-and-bookings-reach-23gw).
+
+A gigawatt of contracts. In two years. From a company most software people have never heard of.
+
+## The bottleneck inside the bottleneck
+
+I wrote last week about Google buying [a nuclear fleet's worth of electricity](https://gb-blog.vercel.app/blog/google-bought-3-6-gigawatts). That was the outer bottleneck: can the industry even get the power? This week the answer is apparently yes — the money and the electrons are flowing — so the bottleneck moved one layer deeper: can the power arrive *smoothly enough* for GPUs to actually use it?
+
+I don't know anything about power engineering. I'm a software guy. My expertise is writing functions, not reading load curves. But that's kind of the point. The industry I want to work in keeps getting more physical. The scarce problems aren't "write a better prompt" — they're megawatt load transients, 800-volt DC busbars, grid interconnection queues, and who finances $7.2 billion in Johor.
+
+That's genuinely good news for someone applying to IT roles. Software keeps getting automated. Nobody is automating the person who racks a server, sizes a busbar, or keeps a substation's transients from frying ten thousand GPUs. The physical layer is the durable layer.
+
+My charger stays warm and boring. Theirs flickers megawatts. Somewhere between those two extremes is where the jobs are.
