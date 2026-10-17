@@ -1,0 +1,31 @@
+---
+title: "You Can Download Both. You Can Only Run One."
+date: "2026-10-17"
+excerpt: "Meta and Black Forest Labs both released 'open' AI models this week. One needs a terabyte of RAM. The other fits on an 8GB gaming GPU. Open weights isn't one thing — it's a hardware question."
+tags: ["ai", "open-weights", "tech-news"]
+image: "/posts/download-both-run-one.jpg"
+---
+
+Thursday night I pushed my nightly commit and then did the thing I'm not supposed to do at 11pm: opened the news. Two headlines, same day, same words — "open weights released." One was Meta. One was a German lab called Black Forest Labs.
+
+I got excited about both. Then I read what it takes to run them.
+
+Meta's release is called Muse Spark Open. It came out October 15, and the numbers are serious: 816 billion parameters total, 42 billion active per token, a 1-million-token context window, and it takes text, images, video, and audio in. It's built for coding and long-running agent work, and Meta trained it on what Hugging Face describes as real developer workflows — multi-file refactors, long debugging sessions, the stuff you actually do at 11pm. Meta calls it the most capable US open-weight model to date. ([SiliconANGLE](https://siliconangle.com/2026/10/15/meta-releases-816b-parameter-muse-spark-open-for-coding-and-agent-work/), [Reuters](https://www.reuters.com/business/meta-releases-open-weight-muse-spark-model-coding-agentic-tasks-2026-10-15/))
+
+Here's the part that got me. Meta showed it running "locally." On two Mac Studios with M5 Ultra chips linked together — about a terabyte of memory between them. That's the desktop story. The server story is 4 Blackwell Ultra GPUs or 8 H200s, or a roughly 300GB build if you quantize it down. Oh, and the license is the Muse Model License: attribution required, and companies making over $20 million need a commercial agreement with Meta. All the benchmark numbers are Meta's own, so treat them like a resume. The weights are on Hugging Face and the big inference providers will host it for you. ([9to5Mac](https://9to5mac.com/2026/10/15/meta-launches-new-muse-spark-open-model-optimized-to-run-on-mac-studio/))
+
+Same day, October 15, Black Forest Labs released FLUX 3 Image Klein. It's a 5.6-billion-parameter image model: text-to-image, pixel-accurate editing, up to ten reference images, native 4K output, and bounding boxes that tell it where to put things or where an edit should happen. The INT8 build runs on an NVIDIA RTX card with 8 GB of VRAM. Eight. BFL says it does a 1MP image in about four seconds on a 5090 and under nine on a 4070 — a card a lot of people already own for gaming. LoRA fine-tuning works from day one. The license is the FLUX Kommunity License: free commercial use under $5 million in annual revenue. ([The Decoder](https://the-decoder.com/black-forest-labs-open-weights-image-model-flux-3-image-klein-runs-on-consumer-gpus-with-just-8-gb-of-vram/), [Unite.AI](https://www.unite.ai/new-5-6b-parameter-flux-3-image-klein-debuts-as-open-weights-release/))
+
+Full honesty: I haven't run either of them. I don't have a 4070 and I definitely don't have two Mac Studios. My machine is for coursework, commits, and CodePath problems. I'm a WGU student who works while studying — my hardware budget is a laptop fan working overtime.
+
+But that's exactly why this week stuck with me. Both of these are called "open." They're not the same kind of open at all.
+
+The Meta model is open the way a library is open when the books are shelved 500 feet off the ground. Technically downloadable. In practice, it runs in a data center — Meta's, a cloud provider's, or the machine room of a company that can afford one. The "runs on your desktop" demo needs a terabyte of unified memory. That's not a desktop. That's a data center wearing a desktop costume.
+
+The BFL model is the other kind. A 5.6B model that fits on a gaming GPU is open in the way that actually changes who builds things. A student. A freelancer. An IT team with a workstation and no cloud budget. Someone like me, honestly — download it, run it, fine-tune it, keep your data in your own house. That's the whole promise of open weights, and this week the small model is the one keeping it.
+
+There's something funny here that took me a minute to see. The bigger the "open" model gets, the more it turns back into a cloud product. You download the weights, but you still end up renting the machine to run them on. The download button is real. The running is a subscription. The small model flips that: you download it, and you're done. Nobody else's infrastructure is in the loop.
+
+I'm not saying Spark Open is fake. A frontier-class open-weight coding model from a US lab is a big deal — Meta's claim, anyway — and researchers who can inspect 816 billion parameters will learn real things. But the week had two releases with the same label, and the one most developers can actually touch is the image model that runs on a graphics card people buy to play games.
+
+I'll take the open model I can run. Every time.
