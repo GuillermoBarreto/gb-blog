@@ -1,0 +1,35 @@
+---
+title: "The Week the Scoreboards Died"
+date: "2026-10-18"
+excerpt: "JetBrains shipped its legendary IntelliJ engine to VS Code and Cursor, and decomp.dev killed its public leaderboard after AI made the numbers meaningless. Two competitions ended this week, and I think that's clarifying."
+tags: ["software-development", "dev-tools", "ai", "tech-news"]
+image: "/posts/the-week-the-scoreboards-died.jpg"
+---
+
+I pushed my commit last night. Same as every night.
+
+This morning I read two pieces of news that felt like the same story told twice. I'm still chewing on them.
+
+First: JetBrains. The IntelliJ people. For twenty years, "my IDE is smarter than yours" was basically a lifestyle. JetBrains just surrendered the whole argument — by winning it differently.
+
+They shipped 1.0 of "Java and Kotlin by IntelliJ IDEA" this week. It's the actual IntelliJ analysis engine, running inside VS Code and Cursor. Not a knockoff. The real engine, speaking the Language Server Protocol, living in somebody else's editor. Maven, Gradle, Bazel, Spring tooling, run and debug, the refactorings people paid JetBrains for. All of it, as an extension in the editor you were already using. After two decades of keeping their best technology inside their own windows, JetBrains admitted the editor is a shell. The intelligence is the product. ([JetBrains Blog](https://blog.jetbrains.com/idea/2026/10/intellij-idea-s-java-and-kotlin-for-cursor-and-vs-code-hits-1-0/), [Tech Insider](https://tech-insider.org/jetbrains-java-kotlin-lsp-vs-code-cursor-2026/))
+
+The pricing tells you everything about where this is going. Thirty-day free trial, then it requires an IntelliJ IDEA Ultimate subscription — one license that covers the desktop IDE, VS Code, and Cursor together. And then this line, which I can't stop thinking about: "The license is explicitly designed for human use; we'll release an update regarding licensing models for purely agentic use soon." They're already pricing your AI agent as a separate customer. Next up, apparently, agents in Cursor calling the IntelliJ engine directly, and terminal agents like Claude Code tapping into it too. The engine escaped the editor. Now it's escaping the human.
+
+Second: decomp.dev. This one made me a little sad, honestly.
+
+Since 2024, decomp.dev has been the scoreboard for matching decompilation. People rebuild classic game binaries into human-readable C that compiles back to the exact same bytes. Brutally slow, meticulous work. Years per game. The site gamified it: every fraction of a percent, a progress bar ticked up, and people watched it like a sport. ([WebProNews](https://www.webpronews.com/video-game-decompilation-site-decomp-dev-shuts-public-index-as-ai-overruns-community/))
+
+On Thursday, the admin (he goes by Encounter) posted "Sunsetting decomp.dev" and killed the public index and leaderboard. No new projects. The old pages stay, but the scoreboard is dead.
+
+Why: AI made the numbers cheap. He says the newer models got so good at following complex instructions — cross-referencing debug symbols, writing natural code — that people started "burning tokens to make number go up." Forking projects to "finish" them with AI against the creators' wishes. Racing the human teams to ship half-baked ports and take the credit. The community's social contract broke. "The community aspect of decompilation has been broken," he wrote. "A hollow numbers game." ([XDA Developers](https://www.xda-developers.com/a-decomp-tool-is-shutting-down-after-a-tidal-wave-of-ai-the-community-aspect-of-decompilation-has-been-broken/), [GBAtemp](https://gbatemp.net/threads/decomp-dev-changes-course-over-ai-driven-decomp-slop-fears.685430/))
+
+Here's the part I respect: he refused to become "the sole arbiter" of what counts as pure. He didn't ban AI either. He said it "can help tremendously when used correctly." He just killed the number. When a measure can be bought with tokens, it stops measuring anything. So he shot the measure.
+
+Two competitions ended this week. The editor war and the progress-bar war. And here's what keeps hitting me: in both cases, the thing that died was the shell. The window you type in. The number you watched go up. What's left underneath is the actual work — the engine, the code, the judgment of the person reviewing it.
+
+I'm a student. I've never done matching decompilation — couldn't if I tried. But I push code every night, and I know exactly what the progress bar feels like. Streaks, badges, green squares. They're motivating until they become the whole point. The night my only goal becomes keeping the streak alive, I'm not learning anymore. I'm farming.
+
+So this is where I land, and it's kind of a relief. The scoreboards are dying and the craft is surviving. Editors are interchangeable now. Percentages are buyable. What can't be farmed is whether you can read the code and say why it's right or wrong. No token-burner can fake that, and it's exactly what I'm training in CodePath every week.
+
+The shells die. The engine keeps going.
