@@ -1,0 +1,21 @@
+---
+title: "The CUDA moat is made of software"
+date: "2026-10-19"
+excerpt: "Amazon isn't trying to build a better GPU this week. It's trying to make your PyTorch code not care which GPU it's on. That's the whole war, and it's being fought with config files."
+tags: ["ai", "software", "tech-news"]
+image: "/posts/the-moat-is-software.jpg"
+---
+
+I write little scripts that delete annoying steps for people. That's most of what makes me useful at my job. Ticket comes in, same friction, I automate the boring part, and three hundred plus associates get their hours back. So when I read Amazon's news today, I laughed. Because it's the exact same move, just at chip-company scale.
+
+Amazon's chip unit, Annapurna Labs, is launching TorchNeuron this week: a tool that lets code written in PyTorch run on Amazon's Trainium AI chips with a single configuration change. No rewriting. Colin Brace, the VP of software there, told [Reuters](https://www.reuters.com/business/retail-consumer/amazon-says-its-ai-chips-will-work-with-popular-coding-language-challenging-2026-10-19/) it's all about "meeting customers where they're at," and said more than 30 early customers in robotics, world models, and voice AI are already on it. It's free, open-source under Apache 2.0, and the official release lands at the PyTorch Conference North America on October 20.
+
+[PyTorch itself confirmed it](https://pytorch.org/blog/introducing-torchneuron-native-pytorch-backend-for-aws-trainium/): TorchNeuron is a native backend built on PyTorch's own hardware-agnostic extension points, so the model code, the libraries, and the tools developers already use just run on Trainium. [Amazon's announcement](https://www.aboutamazon.com/news/innovation-at-amazon/torchneuron-pytorch-aws-trainium-chips-ai) fills in the details: it covers Trainium2 and Trainium3, plugs into TorchTitan and standard distributed training, Hugging Face added native Trainium support to its tools, and Amazon tests TorchNeuron against hundreds of thousands of AI models on every build so issues get caught before a customer workload ever runs.
+
+Here's what got me. Nvidia's dominance was never really about having the best silicon. It was about CUDA. A decade of making PyTorch just work on Nvidia chips, so well that "just works" became the product. Developers don't pick the fastest chip. They pick the chip that doesn't ask them to rewrite anything. Amazon spent years essentially saying "our chips are cheaper, please port your code," and developers, who are busy, didn't. So Amazon stopped asking and did the boring, unglamorous work instead: a backend, massive test coverage, upstream contributions to PyTorch itself to strip out code that ties the framework to any one vendor's chips.
+
+That last part is the tell. They want the whole ecosystem hardware-agnostic, not just their own corner of it. Because the ecosystem is where the developers live, and developers are where the money is.
+
+I've never touched a GPU cluster. My hardware budget is a laptop that handles coursework, nightly commits, and CodePath problems. Trainium is way above my pay grade and I won't pretend otherwise. But the lesson lands exactly at my level. The highest-value work is rarely the cleverest. It's the person who stands between the annoying thing and the user and makes it go away. My scripts save people 31 hours a week because clicking the same five buttons was friction. TorchNeuron is the same instinct with a bigger budget: thousands of developers, one config line, no rewrite.
+
+If you're a student or a job seeker, that's worth writing down. The industry talks about geniuses inventing new models. But a lot of the actual jobs are in removing friction. Making the new thing run where the old thing ran. Writing the shim. Testing against hundreds of thousands of models so nobody else has to. Boring wins.
