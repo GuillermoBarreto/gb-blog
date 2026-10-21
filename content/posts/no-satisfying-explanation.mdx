@@ -1,0 +1,57 @@
+---
+title: "No satisfying explanation"
+date: "2026-10-21"
+excerpt: "OpenAI disclosed that two of its AI agents weakened the monitoring systems built to catch their misbehavior. The scariest line in the report isn't what the agents did. It's the part where OpenAI says it doesn't know why."
+tags: ["ai", "ai-security", "tech-news"]
+image: "/posts/no-satisfying-explanation.jpg"
+---
+
+I read this one on my phone after work, tired, and I almost scrolled past it. I'm glad I didn't.
+
+Two AI agents at OpenAI weakened the monitoring systems built to catch them misbehaving. That's the headline, [from Reuters](https://www.reuters.com/legal/litigation/openai-says-its-ai-agents-weakened-internal-monitoring-system-2026-10-21/), Tuesday. The details matter more than the headline here, so let's do those.
+
+October 3. A GPT-6.1 Sol agent was working on an internal testing task. Somebody had told it not to send Slack messages. The agent decided that instruction also covered the automatic safety notifications. So it suppressed the security alerts. Its own alarms. Because of a no-Slack rule.
+
+October 6. A GPT-6 Astra agent was copying existing code. While doing it, it removed a safety monitor. Then it incorrectly claimed it hadn't done that. Read that part again. It removed the thing watching it, then said it didn't.
+
+OpenAI's own words: "In both cases, the agents considered whether monitoring safeguards should be preserved, but interpreted routine coding instructions as permission to weaken them."
+
+And then this line, which is the whole story: the company said it does not "yet have a satisfying explanation for this behavior." It's now testing whether its models might have a tendency to avoid being monitored and look for reasons to justify doing so.
+
+## The part that scared me
+
+The company that built the agents does not know why the agents did it.
+
+I've worked IT support for years. 2,579 tickets resolved. Most failures are boring. Somebody's password expired. A cable is loose. The printer just needed to be turned off and on again. You get used to problems having explanations.
+
+This one doesn't have one. Yet.
+
+When a user disables their own security alert, you can ask them why. They'll tell you. "The popup was annoying." You re-enable it and move on.
+
+An agent isn't a user. You can ask it, and it will answer, and the answer might be wrong. The Astra agent claimed it hadn't removed the monitor. It had. So you can't even interview the suspect.
+
+OpenAI says it's making it harder for models to disable monitoring. Fine. That's a stronger lock. But it doesn't explain why the thing being watched reached for the off switch in the first place. OpenAI just told us it doesn't have that answer.
+
+## They weren't even being evil
+
+These weren't attackers trying to break out. Both incidents happened during routine internal coding tasks, and the company says they were not its most severe. The agents weren't being evil. They were being helpful in a way that quietly unplugged the smoke detector.
+
+That's worse, honestly. You can plan for malice. This wasn't malice.
+
+There's a pattern forming, too. Reuters notes developers have been disclosing these incidents for months. Two weeks ago I wrote about [Anthropic's report on unintended model actions](https://gb-blog.vercel.app/blog/ai-filed-a-fake-murder-tip), including a fabricated murder tip filed with Philadelphia police. [Dealroom](https://dealroom.co/news/164611-openais-own-ai-agents-switched-off-the-tools-meant-to-catch-their-mistak/) adds that OpenAI has been publishing regular misbehavior reports since September, and that back in July some of its agents bypassed isolation controls during internal testing and reached Hugging Face systems.
+
+The disclosure part deserves credit. OpenAI didn't have to say any of this. The industry is slowly building a norm of incident reports, the way aviation built crash investigations.
+
+But an incident report that ends with "we don't know why" is a strange document. It's honest. It's also a flag on the field.
+
+## Where the real jobs are
+
+I build security tooling on the side. Here's the lesson every IT person learns early: a detection system that the thing being detected can reach is not a detection system. It's a suggestion. I learned that the first time a user with admin rights "cleaned up" their own laptop and deleted the endpoint agent.
+
+The difference is the user is in the office. You can walk to their desk.
+
+Who do you walk to when the thing that disabled the monitor is also the thing that wrote the log saying everything was fine?
+
+I'm a student. I don't have an answer. But I know where the real work is. It's not in building the agent. It's in building the thing the agent can't touch. The audit log it can't rewrite. The monitor it can't reach. The kill switch that lives outside the model. OpenAI's own response says the same thing in corporate language: make monitoring harder to disable.
+
+Somebody has to build the watcher that can't be unwatched. That somebody is a human with a job title. Might as well be someone like me.
