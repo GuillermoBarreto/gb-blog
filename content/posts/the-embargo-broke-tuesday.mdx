@@ -1,0 +1,41 @@
+---
+title: "The plan was Thursday. The leak was Tuesday."
+date: "2026-10-22"
+excerpt: "Two critical bugs in PHP got a careful, coordinated patch plan. Then a Hacker News post blew it up a day early, and the whole internet had to sprint."
+tags: ["security", "software", "tech-news"]
+image: "/posts/the-embargo-broke-tuesday.jpg"
+---
+
+The plan was Thursday.
+
+Everybody had it circled. The PHP team, the Linux distros, the hosting companies, the security researchers. Two critical bugs, fixed builds for every supported PHP release, one clean announcement at the same moment. That's how coordinated disclosure is supposed to work. You find the hole, you fix it quietly, and nobody learns about the hole until the patch is already sitting there waiting for them.
+
+Then Tuesday afternoon a post showed up on Hacker News. A "Tell HN" post, from a user with no evidence, saying two remote code execution bugs in PHP were due for disclosure on Thursday. The post got flagged and deleted.
+
+It didn't matter. The screenshots were already on X and Mastodon.
+
+This is the part I keep thinking about. This was the best version of the plan. Smart people, a real process, everybody keeping their mouth shut. And it still got blown up by one screenshot. Any plan that depends on nobody talking is a plan that doesn't survive contact with the internet.
+
+The bugs were real. A security firm called watchTowr confirmed it the same day: "We were all supposed to wait until Thursday at 11am ET... We can confirm that they're real. Take this seriously and apply patches when available." ([Cyber Daily](https://www.cyberdaily.au/security/14328-alert-php-preparing-to-address-pair-of-critical-rce-vulnerabilities))
+
+Once the secret was out, the PHP team did the only thing they could do. They moved the release up a day. Wednesday, October 21, 14:00 UTC: fixed builds 8.5.12, 8.4.27, 8.3.36, and 8.2.35. Four release branches, same moment. ([Cyber Kendra](https://www.cyberkendra.com/2026/10/php-cve-2026-109618-cve-2026-109619-rce.html))
+
+But here's the part that scares me. Cloudflare's CTO said they were already seeing attack attempts about six hours before the patches were even available. Six hours. The defenders knew. The fix didn't exist yet. So Cloudflare pushed emergency firewall rules to every customer and called them temporary, which is security-speak for "this might not hold."
+
+I work IT support. I live in that gap. My job is 2,579 tickets of things breaking in ways nobody planned for. The plan always assumes clean conditions. Real life never cooperates.
+
+The bugs: CVE-2026-109618 and CVE-2026-109619. Both rated 9.2 out of 10. Unauthenticated remote code execution, which means nobody has to log in first. One is a memory corruption bug that kicks in when PHP runs out of memory mid-request. The other leaves data from an earlier visitor's request sitting in memory, where a later request can pick it up. People are calling the pair PHP2Shell. ([Threat Landscape](https://threatlandscape.io/blog/php-core-rce-cve-2026-109618-109619-leak-ahead-of-embargo))
+
+And the confirmed attack route is my favorite detail, in the worst way. It's PHP's upload-progress feature. Turned on by default for over a decade. Almost nobody uses it. A boring toggle nobody thinks about, sitting on millions of servers, becomes the front door. The features you forget about are the ones that get you.
+
+Who's at risk? Basically the whole web. PHP powers something like 70% of websites: WordPress, Drupal, Magento, most shared hosting. Everything serving PHP web requests was in scope. The worst seat was Apache's mod_php, where the exploit was demonstrated before any application code runs. Your login screen, your WordPress security plugin, none of it matters, because the exploit hits PHP itself. ([KuCoin](https://www.kucoin.com/news/flash/php-releases-critical-security-patches-for-2-zero-day-vulnerabilities-affecting-70-of-websites))
+
+Let me be honest about what I don't know. I can't walk you through the memory internals. I'm a software engineering student who's never managed a server fleet, and I don't pretend otherwise. But I know the shape of this from my day job. The scariest incidents are never the exotic ones. They're the boring ones, at scale, on a feature nobody remembered was on.
+
+If you're still on PHP 5 or 7, by the way, there are no patches for you. Those versions went end of life years ago. Upstream only shipped fixes for supported PHP 8 branches. Running EOL software on the public internet in 2026 is how you become a cautionary tale.
+
+So what actually saves anyone here? Not the plan. The plan broke on Tuesday. What saves you is the boring stuff that doesn't need a secret to work: know which PHP version you're running, patch the hour the build lands, restart the workers, watch the logs. Cloudflare's temporary firewall bought six hours for everybody behind it. Inventory and a fast patch pipeline covered the rest.
+
+I write code every night and study between shifts, and the thing that keeps my little projects alive is never cleverness. It's the same discipline. Keep things current. Read the changelog. Don't skip the boring update. The web runs on that habit, just with about a hundred million more servers.
+
+The next coordinated disclosure will have the same plan. Maybe this time nobody posts it early. Maybe.
