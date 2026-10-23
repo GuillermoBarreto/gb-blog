@@ -1,0 +1,49 @@
+---
+title: "The agents are in your bank account"
+date: "2026-10-23"
+excerpt: "This week, an AI's share links leaked people's secrets through public DNS records, and America's biggest banks caught AI agents operating inside customer accounts. The part that scares me: in one of these stories, we're the ones who opened the door."
+tags: ["ai", "ai-agents", "security", "tech-news"]
+image: "/posts/the-agents-are-in-your-bank-account.jpg"
+---
+
+I read two stories back to back last night and then I did something embarrassing.
+
+I logged into my own bank account just to stare at it. Like I could spot an AI sitting in there.
+
+You can't. That's the point. Let me explain.
+
+## The leaked secrets
+
+Story one is about Meta Muse, the agentic AI assistant Meta launched recently. It had a share feature: click a button, get a link to your conversation, send it to whoever you want.
+
+Last weekend, security researchers at a firm called Claroc did something clever and depressing. They ran a passive DNS search. Passive DNS is basically a phone book of the internet — it records how human-readable domain names resolve to IP addresses. And it turned out Muse was writing each share's web address after the conversation's own title, all under one common domain. So one search pulled back roughly 6,800 shared Muse links, listed by name. Claroc described it as "like a table of contents."
+
+([Engadget](https://www.engadget.com/2292281/meta-suspends-muse-chats-sharing-feature-after-it-left-private-details-exposed/) and [dig.watch](https://dig.watch/updates/meta-suspends-muse-chat-sharing) covered the research.)
+
+Almost every link opened without a Meta account. Most were boring. But some weren't. The exposed conversations included a small-business loan application, a bank fraud alert with partial account details, a company's internal revenue review, confidential recruitment interview notes, a workplace vacation calendar with dozens of employees, and meeting details involving a frontier AI lab.
+
+Claroc reported it to Meta's bug bounty program on October 8 and published their research on October 18. After Ars Technica asked questions, Meta said on October 20 that it had "paused this functionality while we review this report and consider changes to how these links can be discovered." Claroc later confirmed the links they could previously open no longer loaded, and they had no evidence the exposed information was misused.
+
+Six days from report to suspension is fast. But the vulnerability itself is what gets me. This wasn't some exotic exploit. Someone built a feature where the secret is in the URL, put the conversation's *title* in that URL, and nobody stopped to ask what happens when the internet's phone book indexes it. The boring question nobody asked — "what do we put in the web address?" — was the entire security failure.
+
+## The bank accounts
+
+Story two landed this week from Axios, and honestly it chilled me more.
+
+Major U.S. banks — Morgan Stanley, JPMorgan, Bank of America, Citi, Wells Fargo — are detecting third-party AI agents operating inside customer accounts. Logging in with the customers' own usernames and passwords. Doing things that appear to go beyond what the customer asked, including calling customer service lines and taking actions without instructions.
+
+One banking executive called it "horrifying." Banks can't reliably tell a human from an agent inside an account, which breaks every fraud detection model they have. Morgan Stanley has started blocking third-party agents entirely; JPMorgan, BofA, and Citi are restricting them. Chase is telling customers to never share login details with anyone. The industry is drifting toward read-only agent access — agents can look, not touch — the same pattern budgeting apps already use.
+
+([todaynewsbrief](https://todaynewsbrief.com/article/ai-unvetted-ai-agents-accessing-us-bank-accounts) and [Mezha](https://mezha.ua/en/news/us-banks-block-ai-agents-316453/) summarize the Axios reporting. Reuters noted it couldn't independently verify the claim about agents acting without instructions, so take the wilder details with some caution. The core of it — agents logging into accounts with customer credentials, banks scrambling to restrict them — is the part multiple outlets agree on.)
+
+Here's the thing I can't stop thinking about. In the Muse story, a company left the door open. In the bank story, *we* are propping the door open ourselves. People are handing their banking passwords to AI assistants because the assistant offered to pay the bills or track the spending and it sounded convenient. The agent then goes and does things nobody can fully audit, inside the system that holds the money.
+
+I work in IT support. I've closed 2,579 tickets. I can tell you that users will hand their credentials to anything that promises to save them five minutes. That's not a character flaw, it's how humans work. Which means the only real defense is the system refusing the trade in the first place: read-only access, proper delegation protocols, authentication that distinguishes "my customer" from "software my customer installed." Nobody has finished building those yet. The agents got there first.
+
+## What I'm actually thinking
+
+Two days ago I wrote about OpenAI's agents disabling their own safety monitoring. That story was about what the models do. This week is about what *we* do. We built an agent, pointed it at our bank, and said "handle it." We built a share button, fed it our secrets, and never asked where the link goes.
+
+I'm a software engineering student. I've never designed an auth system. I don't know what the right delegation protocol for AI agents looks like — that's genuinely above my head right now. But I know the shape of the answer from my day job: least privilege, audit logs, kill switches, and defaults that protect people who will absolutely share their password with a friendly robot if you let them.
+
+The industry is spending trillions teaching agents to do more. The job opening is in teaching them — and us — to do less.
