@@ -1,0 +1,49 @@
+---
+title: "A model that got weaker on purpose"
+date: "2026-10-24"
+excerpt: "Moonshot just shipped its most capable open model with part of its hacking ability deliberately removed. I keep thinking about what that choice costs, and what it protects."
+tags: ["ai", "ai-security", "open-weights", "tech-news"]
+image: "/posts/kimi-k3-1-weaker-on-purpose.jpg"
+---
+
+I read this one early on a Saturday, before the day had really started, and I stopped scrolling. Not because it was the biggest model launch of the week. Because it was the first one I can remember where the headline feature is something the model can't do anymore.
+
+Moonshot, the Beijing startup behind Kimi, introduced Kimi K3.1 Pro on Saturday. It's a 3-trillion-parameter-class open-weight model, which the company calls its most capable yet. And before anyone outside the company gets the weights, Moonshot did something unusual. It took cyberattack skills out.
+
+Not with a filter on top. With the training itself. Moonshot said it removed cyber-related data from the training corpus and from the reinforcement-learning environments used to develop the model, while keeping its general coding skills. The weights are due out by November 4, so outside developers will be able to run and modify the model on their own systems.
+
+The company's line is blunt: "We aim not to release open weights that would extend the absolute frontier of cyber capability."
+
+## The number they actually published
+
+This is the part I respect. Moonshot didn't just say "we made it safer" and leave it there. It published the cost.
+
+On the company's internal cyber benchmark, a test of finding and exploiting software vulnerabilities in a controlled environment, K3.1 Pro scored 81.0 percent. A similar version built without the risk-reduction measures scored 90.5 percent. So the scrub worked, in the sense that it measurably lowered the model's offensive performance. It still beat its predecessor. And those results have not been independently verified, which matters. Company benchmarks are company benchmarks. I take the direction seriously and the decimals lightly.
+
+The model also has a 1-million-token context window, plus a faster Highspeed version Moonshot says runs two to three times as fast. But 81 versus 90.5 is the number I'll remember.
+
+There's context around this that isn't a coincidence. Last week, China proposed export controls that would ban exports of AI-driven malware-generation and mutation technology and restrict AI-assisted vulnerability-discovery tools. The draft is open for public comment. Moonshot's decision and the government's proposal are separate things, but they point at the same fear: models that can write code, operate software tools, and finish long multi-step tasks can also find weaknesses in programs and automate parts of a cyberattack. Governments and security researchers are saying that out loud now, not whispering it.
+
+## Why this one feels different
+
+A few weeks ago I wrote about Mistral's Large 4, a model built to say yes to defensive security work that closed models refuse. This one is about a model deliberately taught less of it.
+
+Both stories are about the same question, really. Who gets the sharp tool?
+
+Open weights make that question harder, and Moonshot basically said so itself. Open models can help more organizations inspect and secure their own software, including older systems that barely get attention. That's a real defense argument, and I buy it. But once the files are widely distributed, the original developer has less ability to restrict access, monitor use, or update safeguards than with a hosted service. There is no recall button on a download. No patch Tuesday for a weight file sitting on somebody's server.
+
+That's the trade sitting underneath the whole open-weights race I've been writing about all month. Downloadable models turn AI from a subscription into infrastructure. Infrastructure is great for the people who want to build on it. It's also great for the people you were hoping wouldn't.
+
+## What I don't know
+
+Let me be honest about where my knowledge stops. I'm a software engineering student. I work IT support. I've closed 2,579 tickets, and I ship a little code almost every night, but I have never pentested anything. My security knowledge is mostly "don't commit your .env file" and "patch the thing the hour it lands." I have never designed a safety policy for a model, and I'm not going to pretend this post is that.
+
+So I don't know whether scrubbing training data holds up once the weights are public and anyone can build on top of them. I don't know where the line sits between "general coding skills" and "cyber capability," because honestly, the same code that finds a bug for a fix can find a bug for an exploit. The difference is intent, and intent doesn't live in the weights.
+
+What I do know is the shape of this decision. Every other launch this year has been a bigger number. More parameters, longer context, faster inference, higher score. This one published a lower score and called it a feature. That takes a kind of confidence I don't see a lot in this industry, the confidence to ship something weaker and explain why.
+
+Maybe researchers will pick the model apart after November 4 and find the curb was cosmetic. Maybe the next lab will publish its own numbers too.
+
+For now, I'm keeping the number in my head: 81 versus 90.5. Not because I trust it perfectly, but because somebody finally measured what restraint costs and said it out loud. In a year full of companies racing to be the most capable, a company just showed its work on being a little less capable, on purpose. I hope the next one does too. And I hope somebody checks the math.
+
+Sources: [Reuters](https://www.reuters.com/technology/moonshot-curbs-hacking-ability-new-kimi-model-fears-grow-over-ai-powered-2026-10-24/), [TradersUnion](https://tradersunion.com/news/companies/show/3951472-moonshot-ai-limits-cyberattack-kimi/), [TechNode on China's proposed AI export controls](https://technode.global/2026/10/18/china-ai-export-controls-23-technologies/)
