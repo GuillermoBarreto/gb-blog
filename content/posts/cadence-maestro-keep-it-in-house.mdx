@@ -1,0 +1,41 @@
+---
+title: "Cadence just made the case for keeping your chip designs in-house"
+date: "2026-10-26"
+excerpt: "Cadence launched Maestro, a set of chip-design AI models you can run behind your own firewall. Its rival is going the other way, with a model that lives on OpenAI's infrastructure. The split tells you what companies actually trust AI with."
+tags: ["ai", "software", "tech-news"]
+image: "/posts/cadence-maestro-keep-it-in-house.jpg"
+---
+
+I was scrolling this morning before work, half awake, and a chip story stopped me. Not because I design chips. I don't. I have never laid out a transistor in my life, and I am not going to pretend otherwise.
+
+It stopped me because it was about a question I actually deal with at work: what do you send out, and what do you keep in the building?
+
+Cadence Design Systems launched a portfolio of AI models on Monday called Maestro, tuned to help design computer chips. That means arranging billions of transistors so the thing works. Cadence builds the software engineers use for that work, and it is racing to get AI agents to use those tools on their behalf. [Reuters](https://www.reuters.com/business/cadence-unveils-nvidia-backed-ai-models-that-chipmakers-can-run-in-house-2026-10-26/)
+
+The models are built in part on Nvidia's open-weight Nemotron model, and secured with Nvidia's OpenShell safety technology. The part that matters to me is where they run. Cadence says customers can run them on its own cloud, on a public cloud, or entirely in-house, behind their own firewalls and in their own data centers. They can also fine-tune the models on their own chip designs.
+
+That last bit is the whole story, I think. A chip design is not a blog post. It is the thing a company lives or dies on. Handing it to somebody else's cloud so their model can learn from it is a big ask. Cadence is betting that a lot of companies will say no to that ask, even if the hosted version is easier.
+
+Cadence's early numbers are worth repeating with a flag on them. The company says early testing showed up to 30 percent higher quality and up to five times better cost-efficiency than general-purpose models. Those are Cadence's numbers, not an independent test. I am not going to treat a vendor's launch-day chart as a fact. But the direction makes sense to me. A general model knows a little about everything. A model trained on your actual tools should waste less time guessing.
+
+The Next Platform filled in the backstory, and it sounds familiar to anyone who has used a coding assistant. Cadence already has AI "Super Agents" with names like ChipStack for system-on-chip design and verification, AuraStack for packaging and board layout, InnoStack for routing, and ViraStack for analog circuits. They orchestrate Cadence's existing tools the way a coding assistant orchestrates a compiler and a test suite. [The Next Platform](https://www.nextplatform.com/hpc/2026/10/26/cadence-nvidia-unveil-new-ai-models-to-put-eda-on-autopilot/5305228)
+
+The problem was that the early agents ran on off-the-shelf models, which had not spent much time with the specific language of chip design. Cunningham put it plainly: the big foundation models are the starting point, and you can still specialize. I liked that line. It is the opposite of the sales pitch that one giant model will just do everything.
+
+## The split
+
+Here is where it gets interesting. Cadence is not the only company making this bet, and its biggest rival is betting the other way.
+
+On September 30, Synopsys said it would develop an AI model with OpenAI and share revenue with the ChatGPT maker. That model, GPT-Synopsys, will run on OpenAI-hosted infrastructure. So you have two companies that sell to the same chipmakers, offering the same kind of product, with opposite answers to the custody question. One says: keep it in-house. The other says: trust our hosted partner.
+
+Cunningham framed Cadence as model-agnostic, saying there are more AI model providers out there than there are chip design software vendors. When asked whether Cadence might cut its own deals with proprietary AI labs, he said both open-weight and closed-weight approaches are being pursued equally. That is a careful answer. It reads to me like a company keeping its options open while its first move is clearly about control.
+
+The first Maestro models reach select early-access customers in the fourth quarter. Cadence says the portfolio can be post-trained on a customer's proprietary data, and The Next Platform notes that customization will come more as a managed service than something customers figure out on their own. [Cadence announcement](https://www.tradingview.com/news/business_wire:5fd203ce283da:0-cadence-introduces-maestro-a-domain-specialized-ai-model-portfolio-to-revolutionize-agentic-chip-and-system-design/)
+
+I keep coming back to the custody question because it is the same one I run into on a smaller scale. At my job I support real hardware for real people. Some things you do not ship off to a vendor's dashboard just because it is convenient. You learn where the line is by getting it wrong once, and then you remember it.
+
+I am a software engineering student who ships small code at night. My repos are tiny, and nobody is going to steal my homework and build a company on it. But the instinct scales up. The more valuable the work, the less you want it leaving the building. The companies that understand that will sell a different kind of AI product: not the smartest model in the world, but the one you are allowed to keep.
+
+That scares me a little, in a good way. It means the job is not just "learn to prompt." It is learning a craft well enough to know what should never leave the room, and building the systems that enforce that line: firewalls, access controls, on-prem deployments. The stuff that never makes a launch keynote.
+
+Cadence did not announce a smarter chatbot today. It announced a model that can stay home. In a year when every other announcement is about renting more compute from more clouds, that choice stands out. We will see whether chipmakers agree.
