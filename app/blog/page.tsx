@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getAllPosts, getAllTags } from "@/lib/posts";
-import { PostCard } from "@/components/PostCard";
+import { PostList } from "@/components/PostList";
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -35,12 +35,8 @@ export default function BlogIndex() {
         </div>
       )}
 
-      <div className="mt-10 grid gap-5">
-        {posts.length === 0 ? (
-          <p className="text-zinc-500">No posts yet. Check back soon.</p>
-        ) : (
-          posts.map((post) => <PostCard key={post.slug} post={post} />)
-        )}
+      <div className="mt-10">
+        <PostList posts={posts} />
       </div>
     </div>
   );
