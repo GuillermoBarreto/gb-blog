@@ -1,0 +1,39 @@
+---
+title: "The runtime under my blog just moved, and so did the calendar"
+date: "2026-10-30"
+excerpt: "Vercel made Node.js 26 the default on October 29, the same day Node.js 27 shipped its first alpha under a new one-major-a-year schedule. One change lands on your next deploy. The other changes how you plan upgrades for years."
+tags: ["javascript", "software", "tech-news"]
+image: "/posts/node-26-lts-node-27-alpha.jpg"
+---
+
+I was scrolling before work this morning, coffee doing its job, when a changelog stopped me. Not a model launch. Not a data center deal. A runtime version.
+
+Vercel made Node.js 26 LTS generally available for builds and Vercel Functions on October 29, and it is now the default for new projects. [Vercel's changelog says it plainly](https://vercel.com/changelog/node-js-26-lts-is-now-generally-available-on-vercel). New projects start on 26.x. Existing projects move on their own if the `engines.node` field in package.json allows it. Vercel gives `>=20` as the example. If that is you, your next deployment just runs on 26.
+
+That hit differently because this blog lives on Vercel. I did not test anything this morning. I did not change a setting. I just read a changelog and realized a deploy I push on a normal night could quietly land on a different runtime than the last one.
+
+Node 26 itself entered long-term support on October 28, with support running to April 30, 2029. It shipped as Current back in May, so this is not a surprise release. October is just the month it stops being the brave choice and becomes the default one.
+
+So what actually changes in 26? The one that could bite real code is fetch. On Vercel, built-in fetch now negotiates HTTP/2 with servers that support it, through Undici 8, so multiple requests can share a connection. That can cut latency when a function calls APIs or databases. It also comes with a gotcha Vercel's docs flag: on HTTP/2 responses, `response.statusText` is empty, so code that reads it should switch to `response.status`. If you want HTTP/1.1 back in Functions, you set `VERCEL_FETCH_DISABLE_H2` to `1` and redeploy.
+
+The rest is the kind of stuff that makes a student smile and then immediately feel behind. There is the Temporal API, an alternative to `Date` with immutable values and built-in time zone and calendar support. If you have ever fought a date bug at midnight, you know why that sounds good. V8 is up to 14.6, which adds small things like `Map.prototype.getOrInsert()`. And some long-deprecated internals are gone, which is fine until it is your dependency that was quietly relying on them.
+
+## The part that scared me a little
+
+The second story landed the same day, and it is bigger than a version bump. Node.js 27.0.0-alpha.0.0.0 shipped on October 29, the first release under a new annual model. [LinuxCompatible's writeup has the details](https://www.linuxcompatible.org/story/nodejs-27-alpha-ships-first-release-under-new-annual-model/).
+
+From Node 27 on, there is one major release a year instead of two. Every release becomes LTS. The old odd/even split is dead. Under the old rules, odd-numbered lines never reached LTS, and most teams just skipped them and waited. Node 26 is the last release under that old system.
+
+The new rhythm is fixed. Alpha runs six months, October to March, and allows breaking changes. Current runs the next six months, April to October, for stabilization. Then LTS kicks in for about 30 months. So Node 27 lands in April 2027, enters LTS in October 2027, and reaches end of life around April 2030. Version numbers now track the calendar year of the first Current release, which is why 27 means 2027 and 28 will mean 2028.
+
+I want to be honest about where I sit in all this. I am a WGU software engineering student working in IT support, and I ship code at night in small repos. I have never managed a Node upgrade for a real production system. I have never decided an LTS policy for a team. My experience with runtime versions is mostly the unglamorous kind: something breaks, I read the changelog, I fix the one line, I move on.
+
+But that is exactly why this pair of announcements feels useful to me. The 26 change is a practical checklist. Check your engines field. Check whether anything reads `response.statusText`. Pin the version if you want to choose the moment yourself instead of letting the next deploy choose it for you. Vercel says you can pin by setting `engines.node` to `26.x` and redeploying, and prebuilt deployments need Vercel CLI 65.8.0 or later.
+
+The 27 alpha is a different kind of news. Do not run it in production. It is an alpha, and it is packed with breaking changes, including a jump to V8 15.6 and an OpenSSL 4.1.0 crypto overhaul. Library authors are supposed to test against it early so the breakage shows up in CI, not in somebody's production deploy six months from now. If you only ever install LTS, the alpha barely touches you today. That is the point. The alpha channel exists so package maintainers can find the problems before I do.
+
+There is something reassuring in that, actually. For a decade, the release schedule ran on a guess about how companies adopt software. Now the project is saying, out loud, one major a year, every major gets LTS, here is the calendar. It is less exciting than a new model. It is also the kind of boring, written-down promise that makes real work possible.
+
+I still have not upgraded anything. I will check my own projects tonight, the way I check everything else: slowly, one repo at a time, reading the changelog before I touch the config. The runtime moved. The calendar moved. My job is just to not get caught by surprise by either one.
+
+Cover image: JavaScript code screenshot by Lionel Rowe, released under CC0 on Wikimedia Commons.
