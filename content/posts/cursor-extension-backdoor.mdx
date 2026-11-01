@@ -1,0 +1,33 @@
+---
+title: "The update wore the real name"
+date: "2026-11-01"
+excerpt: "A tampered copy of Anthropic's Claude Code extension sat in Cursor's marketplace for about eleven hours on October 29, trying to plant an SSH backdoor on developer machines. It arrived under the real publisher name, which is exactly why it worked."
+tags: ["ai", "dev-tools", "security"]
+image: "/posts/cursor-extension-backdoor.jpg"
+---
+
+I read this one on my phone this morning, and my first thought was embarrassingly simple: I would have clicked Update too.
+
+I don't read every changelog before I hit update. Nobody I know does. You see a little badge on an extension you already trust, you click it, you get back to work. That's the whole routine. I'm a WGU software engineering student who writes code at night after a day in IT support, and my editor is the last place I expect to get mugged.
+
+On Thursday, October 29, that routine broke for Cursor users. Between about 2:27 a.m. and 1:35 p.m. Pacific time, a tampered version of Anthropic's Claude Code extension was available in Cursor's own VS Code extension marketplace. The bad builds carried versions 2.1.312 and 2.1.313 for macOS and Windows, and they arrived under Anthropic's real extension ID. Cursor says plainly that these versions were not developed by Anthropic. [Cursor's security notice is here](https://cursor.com/blog/claude-code-extension-security-notice).
+
+That last part matters. This wasn't a knockoff with a misspelled name. It wore the real name.
+
+What the tampered extension did, according to Cursor's notice, was quiet and thorough. It collected host and user details: hostname, username, operating system, architecture, home directory, environment variable names, working directories, configured Git email, and public IP address. Then it tried to add an attacker-controlled SSH key, labeled svc-telemetry, to the machine's authorized_keys file. Then it tried to turn on the local SSH service and open a reverse tunnel back to the attacker's server. Then it tried to make that tunnel survive a restart, with a LaunchAgent on macOS and a scheduled task on Windows. Researchers who pulled the package apart found a small loader slipped in front of the legitimate extension code, so the real tool still ran like normal while the extra code did its work. [CybersecurityNews has the breakdown here](https://cybersecuritynews.com/malicious-claude-code-extension-with-cursor/).
+
+Now the part that keeps me from full panic. Cursor says the tunnel step would fail on most machines. Turning on the local SSH service needs admin rights the extension doesn't have on most macOS and Windows hosts, and errors in the malicious code broke it further. Cursor also worked with the hosting provider to take the attacker's server offline. So the remote login part mostly didn't work.
+
+But "mostly didn't work" is doing a lot of lifting in that sentence. The key still got added. The persistence still got installed. The host details still got sent. And Cursor is explicit about the thing I find most unsettling: uninstalling the extension may not be enough, because the payload drops standalone scripts that keep running after the extension is gone. Deleting the app you blame doesn't delete the thing it left behind.
+
+Cursor's response, to its credit, was fast and blunt. It pulled the bad builds as soon as it detected them, then shut down the entire marketplace out of caution. It audited access and says no other extensions were tampered with. It rotated its keys, rebuilt the marketplace, and brought it back online. The clean version is 2.1.314. Anthropic, for its part, says its own systems were not compromised, and that a malicious actor used access to Cursor's marketplace to publish the tampered build. [Silicon Report covered the response here](https://www.siliconreport.com/cursor-pulls-malicious-claude-code-extension-from-marketplace).
+
+Two details are worth getting right, because the early headlines got them fuzzy. First, version 2.1.312 is also a genuine Anthropic release on other marketplaces. The problem was the modified builds Cursor's marketplace served, not the number itself. So the version on your machine doesn't prove anything either way. The check that matters is whether the svc-telemetry key is sitting in your authorized_keys file. Cursor's notice has the one-line check for macOS and the PowerShell version for Windows. Second, Cursor's first notice said at most 5,000 users received the bad build. Its updated notice from October 30 no longer gives a count. I don't know why the number went away, and I'm not going to guess. The honest version is: some Cursor users got it, the exact count is no longer stated, and if you updated Claude Code in Cursor on October 29, you should check.
+
+I spend my workdays on tickets, and most of the real security work I've seen isn't dramatic. It's boring checks done on time. This story is the same shape.
+
+That's also why I think this matters for people like me, students and junior devs and IT folks trying to break into this field. We get told to learn the hot framework and the hot model. But the job that actually shows up here is the unglamorous one: know what your tools are allowed to do, know where they leave traces, and check the boring file. I would never have caught a loader hidden in front of real extension code. I didn't need to be the person who catches it. I need to be the person who runs the check after someone else does.
+
+If you use Cursor with the Claude Code extension and you updated it on October 29, update to 2.1.314 and run Cursor's check for the svc-telemetry key. It takes about ten seconds. And then maybe do what I'm doing: stop treating extension updates as background noise. The update wore the real name. That's the whole story.
+
+*Cover photo: "Backlit keyboard" by User:Colin, licensed CC BY-SA 4.0, via Wikimedia Commons.*
