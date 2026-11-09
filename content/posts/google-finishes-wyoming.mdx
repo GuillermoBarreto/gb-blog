@@ -1,0 +1,47 @@
+---
+title: "Somebody Has to Finish the Building"
+date: "2026-11-09"
+excerpt: "Google just bought a half-finished data center campus in Wyoming that a $30.9 billion startup couldn't complete. And this week I learned my coding agent may have been quietly saving my passwords into a file I push to GitHub."
+tags: ["ai", "data-centers", "tech-news"]
+image: "/posts/google-finishes-wyoming.jpg"
+---
+
+I clicked "don't ask again" this week.
+
+Late night, coding agent wanted to run a command, I was tired, I wanted it to just go. So I clicked the button that makes it stop asking. I've done it a hundred times. It's the whole point of the button.
+
+Then I read the research from Apiiro, published November 5, and I sat there for a minute.
+
+When you click "Yes, and don't ask again" in Claude Code, it saves that command word for word into a file called `.claude/settings.local.json`, inside your project. If the command had a password or an API key in it, the password goes in the file too. Plain text.
+
+Claude Code does add that file to your global git excludes. But not to the project's own `.gitignore`. So if the file gets committed, it goes to GitHub with everything else.
+
+Apiiro searched public GitHub and found 104,185 copies of that file in 103,617 repositories. 1,122 of them held at least one real secret. 1,379 secrets in total. 379 database passwords. 122 Supabase service-role keys. 43 SSH logins. 42 tokens for GitHub, GitLab and npm. 23 AWS keys. 63 organizations affected, most of them software companies. One company they notified confirmed its key was still live.
+
+And deleting the file doesn't fix it. The researchers dug through git history and found 734 more secrets in repos where the file had already been deleted. Old versions stay in the history. Forks keep them too. Counting history and shared settings files and saved agent transcripts, the total was 2,539 secrets across 1,994 repositories.
+
+Apiiro didn't test whether the secrets still worked. But one confirmed live is enough for me.
+
+The part that got me is that this isn't a hack. Nobody broke in. A developer typed a password into a command, clicked a button that said "stop bothering me," and the tool did exactly what it was told. A bug report about this was filed back in August 2025. The reports were closed by a bot. Anthropic hasn't replied, as far as the coverage says.
+
+The fix is boring, which is why I like it. Rotate anything that might have been in a command. Check your own repos for `.claude/settings.local.json`. Clean the history, not just the file. And stop putting secrets in commands in the first place. That's the whole job.
+
+Then, same week, the other side of the same lesson, at a slightly bigger scale.
+
+Google bought a data center campus in Wyoming that Crusoe couldn't finish. Crusoe is a Denver company valued at $30.9 billion. It raised $3.9 billion in September. It announced the Wyoming project last year with Blackstone-backed Tallgrass Energy, talking about eventually scaling to 10 gigawatts of power. Then in June, Bloomberg reported that Google, the customer Crusoe needed to anchor the project, had raised concerns about costs and construction timelines and pushed Crusoe aside.
+
+On November 5, Google announced it would invest $17 billion to build its first Wyoming data center in Laramie County. On November 6, Crusoe confirmed it had sold the unfinished site to Google. Nobody said what Google paid. The $17 billion is what Google plans to spend building the campus, not a purchase price.
+
+Crusoe's CEO framed it as a handoff. His company did the early work, site selection, approvals, power strategy, and now Google takes it from there. Crusoe still has more than 6 gigawatts under contract and a 40-gigawatt pipeline, and it's still building another Google campus near Amarillo, Texas. So this isn't a company collapsing. It's a company that is very good at starting things, and Google deciding it would rather finish this one itself.
+
+I wrote last week about Microsoft quietly returning rented Oracle capacity because the hardware aged out. This is the same story from the other direction. The biggest buyer in the world looked at a half-built campus and decided the safest pair of hands was its own.
+
+I don't know anything about building a data center. I've never negotiated a power contract, never racked a server, never touched a GPU cluster. My expertise is functions and tickets. 2,579 of them, if we're counting.
+
+But I know what a half-finished job looks like. I see it every night in my own repos. The announcement is the easy part. The press release, the valuation, the 10-gigawatt number. The hard part is the last ten percent. The part where someone reads the file before pushing. The part where someone finishes the building instead of announcing it.
+
+Two stories this week, one lesson. The work that matters is the check at the end. Nobody's coming to do it for you.
+
+*Sources: [TechCrunch, "Crusoe sells troubled Wyoming data center project to Google," November 6, 2026](https://techcrunch.com/2026/11/06/crusoe-sells-troubled-wyoming-data-center-project-to-google/) · [The Hacker News, "Claude Code's 'Don't Ask Again' File Exposes Passwords and Keys in 1,122 Public GitHub Copies," November 7, 2026](https://thehackernews.com/2026/11/claude-codes-dont-ask-again-file.html)*
+
+*Cover photo: "BalticServers data center" by Fleshas, Wikimedia Commons, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/).*
