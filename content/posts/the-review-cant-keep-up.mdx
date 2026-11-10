@@ -1,0 +1,45 @@
+---
+title: "The Review Can't Keep Up"
+date: "2026-11-10"
+excerpt: "Three things landed on the same day, and they all said the same thing. The code arrives faster than anyone can read it."
+tags: ["ai", "software-development", "security", "tech-news"]
+image: "/posts/the-review-cant-keep-up.jpg"
+---
+
+I was reading code last night. Not mine. Somebody else's pull request in a project I follow, and I caught myself skimming. It was late. The diff was long. I told myself I'd come back to it in the morning.
+
+Then this morning I read a number that made the skimming feel a lot less like a personal failing and a lot more like the whole industry's problem.
+
+The Linux Foundation published a study yesterday. They asked 172 security practitioners how AI coding tools are changing their work. Fifty-eight percent said their teams now ship code faster than security reviews can keep up. Sixty percent said AI assistants have stuffed more external packages into their codebases. And the dependencies those packages drag in behind them, the transitive ones nobody picks on purpose, get reviewed about half the time.
+
+Half the time. The stuff nobody chose gets checked half the time.
+
+The same study says the tools help, too. AI caught 30% of the vulnerabilities these teams found in the past year. Sixty-nine percent said the tools improved their security posture. Security work got 17% faster. But false positives piled 30% more work back on. So the machines write faster, the machines check faster, and the humans are still the bottleneck in the middle, reading as fast as they can.
+
+That was one announcement. There were two more, same day, and they rhyme.
+
+Anthropic shipped Claude Fable 5.2 and Claude Mythos 5.2. Same model underneath, two doors. Fable is the one most people can use. Mythos is the same model with some safeguards loosened, and only vetted organizations get it, through Anthropic's verification programs for cybersecurity and life-sciences research. The new models are up to 30% faster than the 5.1 versions and 20% cheaper, $8 per million input tokens and $40 per million output tokens, down from $10 and $50. Anthropic says the safeguards block about 55% fewer requests than 5.1 did, at the same strength. Anthropic also says a team of about 1,000 Fable 5.2 agents formalized Fermat's Last Theorem in 30 hours.
+
+I have not used it. I'm not going to pretend I have. But I can read the direction. Faster model, cheaper model, fewer blocks. More code, sooner. The review pile gets taller the same day the writer gets faster.
+
+And the third one is the one I keep thinking about.
+
+Cloudsmith announced an AI Agent Skills registry at KubeCon yesterday. A skill is the file that tells a coding agent how to do its job. The SKILL.md, the instructions, the scripts it runs. Until now, a skill pulled from Git had no version. No version means the file can change and keep the same name, and your agent runs whatever it pulls today. Cloudsmith's move is to treat skills like packages. Versioned. Checksummed. Approved sources only. Their VP of product put it bluntly: "Community skill registries were built for sharing, not for control."
+
+I liked that line because it's the same shape as yesterday's post. Yesterday I wrote about a Claude Code setting that saved a secret into a file nobody reads. Today it's the instructions themselves. The agent doesn't just write the code. It reads instructions you didn't write, from a repo you didn't audit, and then it writes code your team reviews half the time, maybe.
+
+## The part that got me
+
+None of this is a story about AI being bad at writing code. The study says the opposite, mostly. It's a story about reading. The one thing nobody has figured out how to speed up is a human being sitting down and actually reading the diff and saying, this is right, or this is wrong, and here's why.
+
+That's the whole job I'm training for, kind of. CodePath interview prep is mostly that. Read the code. Say why it's right or wrong. My nightly commits are small on purpose, because I can actually read what I wrote before I push it. At work, the tickets I close, 2,579 of them now, most of the value is the same thing. Somebody reports something broken, you read the details, you find the actual problem instead of the one that sounds right.
+
+I don't run a security team. I've never reviewed a thousand-line AI-generated diff for a living. The survey was 172 people, which is small, and the benchmarks Anthropic published are their own numbers, so take them the way you'd take any vendor's numbers. But the direction of all three stories is the same, and I don't think it's a coincidence they landed on the same day.
+
+The writing got faster. The reading didn't. And the instructions the writer follows just got their first version numbers, fifteen years late.
+
+If I'm going to be useful in this field, it's probably not going to be by writing code faster than a model. It's going to be by reading it better than one. That's a slower skill. It doesn't scale the way a model does. But it's the one everything else is waiting on.
+
+*Sources: [Linux Foundation, "State of AI Impact on Software Security and Cybersecurity 2026," November 9, 2026](https://www.linuxfoundation.org/research/ai-impact-on-cybersecurity-2026) and [PR Newswire / ActiveState, "AI Is Writing Code Faster Than Security Can Review It," November 9, 2026](https://www.prnewswire.com/news-releases/ai-is-writing-code-faster-than-security-can-review-it-finds-new-linux-foundation-research-sponsored-by-activestate-302931650.html) — [Reuters, "Anthropic unveils new Fable, Mythos models," November 9, 2026](https://www.reuters.com/technology/anthropic-unveils-new-fable-mythos-models-competition-heats-up-ahead-ipo-2026-11-09/) — [Cloudsmith, "Give your agent skills a trusted control plane," November 9, 2026](https://cloudsmith.com/blog/give-your-agent-skills-a-trusted-control-plane) and [Unite.AI, "Cloudsmith Puts AI Agent Skills Under Artifact Registry Controls," November 9, 2026](https://www.unite.ai/cloudsmith-puts-ai-agent-skills-under-artifact-registry-controls/)*
+
+*Cover photo: "Wikimedia Foundation Code Review Training" by Matthew (WMF), Wikimedia Commons, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/).*
