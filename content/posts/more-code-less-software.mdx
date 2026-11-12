@@ -1,0 +1,47 @@
+---
+title: "More code, less software"
+date: 2026-11-12
+excerpt: "Agents now write almost half the pull requests on GitHub. A Harvard study of 655 firms found the extra code mostly piles up in review, which got 56% slower. And in Georgia, the other kind of review broke down too."
+tags: ["ai", "software-engineering", "code-review", "data-centers"]
+image: "/posts/more-code-less-software.jpg"
+---
+
+I spent last night reading code. Not writing it. Reading it.
+
+I've got an interview tomorrow, and the prep that helps isn't typing more. It's sitting with someone else's code and trying to say what's wrong with it before I run it. That's the part I keep coming back to. Reading is the skill. Writing is the easy part now, and there's a number for that this week.
+
+GitHub's Octoverse report, published October 28, says more than 40 percent of pull requests on the platform started as an agent's first draft in September. About 110 million of them. In March it was 17 percent.
+
+Then two Harvard PhD candidates, Fiona Chen and James Stratton, posted a working paper this month. They followed 720,542 workers at 655 firms, using Jellyfish engineering analytics data from January 2021 through August 2026. When firms added coding agents on top of coding assistants, lines of code went up 44 percent. Commits up 36 percent. Pull requests opened up about 36 percent.
+
+And the work that actually shipped? Issues resolved went up about 14 percent, barely statistically significant. The paper says the data rules out any gain in shipped software bigger than about 31 percent. So the code went up 44. The software went up maybe 14.
+
+Where did the rest of it go? It went into a queue. The time from a pull request being submitted to it getting merged rose 56 percent, from a baseline of about three and a half days. The wait for a reviewer got 60 percent longer. The review itself got 59 percent longer. Comments per pull request went up 39 percent. The size of the pull requests didn't change.
+
+The authors put it plainly: "When AI raises productivity in code writing, complementary steps may serve as bottlenecks."
+
+I read that line twice. It's the whole story in one sentence. Writing got fast. Reading didn't. Nobody bought more reviewers.
+
+Some honest caveats. It's a working paper, not peer reviewed yet. The numbers moved between drafts. The data comes from one company's customers, and those tend to be bigger, established firms. And 79 percent of those firms already used AI tools in code review by July, so this isn't about teams refusing the tools. The tools are in the review too. The queue still grew.
+
+I don't run a team. I'm a student who writes code at night and reviews his own pull requests before merging, and I know what that queue feels like from the inside. You open a diff, and it's 400 lines, and the agent wrote it in ninety seconds, and now you have to decide whether it's right. That decision takes as long as it always took. Sometimes longer, because now you're also deciding whether you trust the thing that wrote it.
+
+That's the job, I think. Not typing. Reading. Saying why something is right or wrong, in writing, where someone else can check your work. CodePath has drilled that into me all fall. My interview tomorrow is for an IT support role, and the 2,579 tickets I closed were mostly the same shape. Read the thing. Figure out what's actually broken. Say so clearly.
+
+## The other review
+
+The same week, the other kind of review broke down in Georgia.
+
+OpenAI published its National Community Compact on November 5. One of the promises: no NDAs with public officials. The next day, November 6, three residents of Effingham County filed a 44-page lawsuit in state court against OpenAI and the county's own leaders. They allege the county's industrial development authority chief signed an NDA with OpenAI in October 2025, that NDAs went to other officials after that, and that the county adopted the Project Camellia zoning ordinance in August without the two public hearings the law requires. Eleven counts, including fraud and Georgia's civil RICO law. They want damages. They say the project hurt their property values and that offers on nearby homes fell through after the announcement.
+
+These are allegations, not findings. Nobody has proved any of it in court. And the project itself is big: five phases, 3.2 gigawatts, somewhere between 20 and 30 billion dollars. The county commissioners already tabled the final site plan on November 3 until November 17, over a missing noise berm. This is the third lawsuit against the project.
+
+I wrote about the compact last week, and I said a promise is not a result. The first test showed up in 24 hours. The compact says no NDAs with public officials going forward. The lawsuit says NDAs were the process. If the allegations are true, the public hearing, the one step where neighbors get to read the plan and object, got skipped. And skipping the review didn't make the project faster. It put it in court.
+
+Same shape as the code story, just with concrete instead of code. The writing is cheap now. The building is fast. The check at the end is the slow part, and it's the part you can't skip, because if you skip it, it comes back slower. A pull request sits in review for five days. A data center sits in court for years.
+
+I'm going to keep practicing the slow part. That's the whole plan, really. Read the code. Read the ticket. Read the ordinance. Say what's wrong, in writing, before it ships.
+
+---
+
+*Sources: [Conectia](https://conectia.pro/en/blog/code-review-is-the-bottleneck-ai-agents-2026) and [Devopsness](https://www.devopsness.com/blog/ai-coding-agents-more-code-not-more-software) on GitHub Octoverse 2026 and the Chen and Stratton Harvard working paper; [AVE News](https://www.avenews.am/en/posts/openai-project-camellia-residents-rico-lawsuit) (citing Tom's Hardware and the Effingham Herald), [VoltGrid News](https://voltgridnews.com/story/openai-project-camellia-faces-georgia-rico-suit-over-20b-campus), and [Data Center Record](https://datacenterrecord.org/projects/openai-effingham-county-data-center-ga) on the Project Camellia RICO suit. Cover photo: [Lisamarie Babik, "Pair programming 1", CC BY 2.0, via Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Pair_programming_1.jpg).*
