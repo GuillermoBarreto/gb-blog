@@ -1,0 +1,47 @@
+---
+title: "432 Questions Paused a Gigawatt"
+date: "2026-11-14"
+excerpt: "A town in South Australia asked 432 questions and a 1,200-megawatt data center paused itself. Same week, llama.cpp hit 1.0. The check is the job."
+tags: ["ai", "data-centers", "tech-news"]
+image: "/posts/432-questions-paused-a-gigawatt.jpg"
+---
+
+Yesterday was interview day. Three of them, back to back, all for the same Amazon data center tech role. Ten, twelve, one. So I did what I always do when I'm nervous. I scrolled the news before I was fully awake.
+
+And I found a story from the other side of the world that I haven't stopped thinking about since.
+
+In South Australia, a company called Quantum DC wanted to build a 1,200-megawatt AI data center on farmland near a town called Tungkillo, about 55 kilometers east of Adelaide. On-site gas generators. Two new substations. A hookup to a 275 kV transmission line. Around 120 hectares of a 220-hectare site.
+
+On Thursday, the company paused the whole thing. Not because a regulator killed it. Because the town asked questions.
+
+More than 350 people contacted the company. The community put together a list of 432 detailed questions. Water. Power. Farmland. Noise. Traffic. Bushfire risk. Night lighting near a dark sky reserve. Aboriginal cultural heritage.
+
+The CEO, Alby Tomassi, put out a statement. He said the company misread the strength of feeling about the proposal, and that the first weeks of engagement created more questions than answers. He apologized. The company cancelled its information sessions for next week and said it won't file for approval this year.
+
+432 questions. That's what it took.
+
+I've spent the last month writing about this same fight from every angle. Voters in Ohio and Texas said no on election day. Towns in Nova Scotia rallied. Norway paused new grid hookups. And now a developer in Australia looked at a list of questions from its own neighbors and hit pause itself.
+
+The pattern keeps repeating, and I keep coming back to the same thought. The buildout isn't losing to protests. It's losing to paperwork. Specific questions, written down, with numbers attached. How much water. Which substation. What happens at night. That's not a chant. That's a ticket queue.
+
+I know ticket queues. I've closed 2,579 of them. A vague complaint goes nowhere. A specific question with a number in it has to be answered by someone, in writing, with their name on it. That's the whole job.
+
+Then there's the second story. Smaller. And honestly the one that made me smile.
+
+llama.cpp hit 1.0 on Thursday. If you don't know it, it's the open-source engine a huge chunk of local AI runs on. Your laptop, your phone, a server in a closet. It runs models. It isn't a model.
+
+For three and a half years it shipped with build numbers instead of versions. b12359, b12360, a number that just counted commits. Now it's 1.0.0, and the promise that comes with it is simple. If we break the public API, the major version number changes. No surprises buried in a Tuesday update.
+
+They also cleaned house. 35 deprecated functions gone. FP8 key-value caches, which cut memory use. A cache for mixture-of-experts models that don't fit on the GPU. Hardening on the little server it ships with. More than 150 model architectures supported now.
+
+Nobody's going to write a headline about a version number. But if you build apps that run models on a person's own machine, this is the week your foundation stopped moving under you. You can pin to 1.0 and know what you're standing on.
+
+Same week, LangChain raised $300 million at a $3 billion valuation to build out LangSmith, the platform that watches and governs AI agents in production. Investors just paid $3 billion for the tools that check the agents' work. Same lesson from the other direction. The agents got fast. The checking got expensive. Somebody has to sell the checking.
+
+So. Two stories, one week. A town asked 432 questions and a gigawatt campus paused. A boring little engine stamped 1.0 and a thousand apps got a floor they can stand on. And a company raised $300 million to watch the robots.
+
+I don't know much about negotiating power contracts or building data centers. I'm a student who works IT support and writes code at night. But I know this much. The question is the job. The version number is the promise. And the check at the end is the only part that actually holds.
+
+*Sources: [Bloomberg, "Another Data Center Halts in Australia as Public Backlash Rises," November 12, 2026](https://www.energyconnects.com/news/utilities/2026/november/another-data-center-halts-in-australia-as-public-backlash-rises/) and [ABC News via Europe Says, "Quantum DC halts approval process of Adelaide Hills AI data centre," November 12, 2026](https://www.europesays.com/australia/143374/) — [Hugging Face, "llama.cpp v1.0.0: A stronger foundation for the local AI ecosystem," November 13, 2026](https://huggingface.co/blog/ggml-org/llama-cpp-v1) and [Unite.AI, "Llama.cpp V1.0.0 Sets API Stability Rules for Local AI Tools," November 13, 2026](https://www.unite.ai/llama-cpp-v1-0-0-sets-api-stability-rules-for-local-ai-tools/) — [LangChain, "LangChain Raises $300M Series C at $3B Valuation," November 13, 2026](https://www.langchain.com/blog/series-c)*
+
+*Cover photo: "Farmland," Willunga, South Australia, by Wikipedian, January 7, 2008. Licensed under [CC BY-SA 3.0](https://commons.wikimedia.org/wiki/File:Farmland_-_panoramio_(2).jpg), via Wikimedia Commons.*
