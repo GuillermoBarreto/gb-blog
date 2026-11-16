@@ -1,0 +1,41 @@
+---
+title: "A prepayment is not a lease"
+date: 2026-11-16
+excerpt: "Fermi took $200 million for 600 megawatts of AI power with no signed lease. The same week, a survey found 81% of teams merged AI code they didn't fully understand. Same story, two scales."
+tags: ["ai", "data-centers", "tech-news"]
+image: "/posts/a-prepayment-is-not-a-lease.jpg"
+---
+
+Monday morning. Coffee. I'm catching up on the weekend's news before work, and two stories land next to each other in my feed. I didn't plan to write about either one. Then I read them twice, and they're the same story.
+
+The first one is Fermi America. Last Thursday, November 12, the company announced its third-quarter results and a deal with an unnamed "investment-grade hyperscaler" for 600 megawatts of power at Project Matador, its giant AI campus near Amarillo, Texas. The customer is putting about $200 million down, up front, to get construction moving, with another $90 million steel purchase in the works. Power starts flowing in 2027. Fermi calls it "permitted power": a 6-gigawatt air permit, firm natural gas supply, turbines on order, 200 megawatts from the local utility, Xcel Energy.
+
+Sounds like a done deal. It isn't.
+
+There is no signed lease. What the two sides actually signed, on November 10, was a non-binding letter of intent. Fermi's own quarterly filing says there's no guarantee a definitive lease ever gets signed, and it doesn't say whether the $200 million is refundable if it doesn't. The same filing keeps the company's going-concern warning, the one that says there's substantial doubt it can keep going. Fermi lost $141.6 million last quarter and reported no revenue at all.
+
+And the week got worse from there. The lease Fermi did have, with a company called TensorWave for 222 megawatts, was terminated on November 10 after its closing date passed without an extension. The AMD credit support tied to that lease went with it. Fermi's top nuclear builder has left, and the reactor timeline has slipped. The nuclear plants were always the long-dated part of the pitch. The power that actually shows up in 2027 comes from gas and the grid.
+
+There are deadlines hanging over all of it. By December 31, Fermi's landlord, the Texas Tech University System, has to issue a notice to proceed, and that depends in part on having a lease with a tenant for at least 200 megawatts. A separate loan agreement wants an approved customer agreement by the same date. On the earnings call, management said the $200 million wire was due November 13 and construction mobilization is targeted for December 1.
+
+So: $200 million, real money, for a building that has no tenant on paper yet. A prepayment is not a lease. That's not my opinion, that's the filing.
+
+The second story is a survey. TestMu AI, a testing company, published its State of AI in Quality Engineering 2026 report on November 13. It surveyed testers, developers, and QA leaders from late July to early October. The headline number: 81% of teams have merged AI-written code or tests they didn't fully understand. Nineteen percent do it regularly. And 44% of teams say more bugs are reaching production as AI writes more of their code.
+
+Only 41% of teams run any automated check on AI-written code before it merges. Ninety-three percent of developers say they've merged AI output they didn't fully understand. At 40% of teams, AI now writes more than half of the production code.
+
+I should be straight about what this is. It's a vendor survey. TestMu sells testing tools, so it has a stake in the answer being "you need more checking." The numbers are self-reported, and I haven't seen the raw data. But the direction matches everything else I've written about this month. Sonar's survey last week said AI generates or assists 65% of committed code, up from 42% a year ago, and only 6% of developers fully trust it. The Linux Foundation found 58% of security practitioners ship code faster than reviews can keep up. Different surveys, same shape.
+
+Here's what connects the two stories for me. In both of them, the money and the code moved first, and the check is still catching up. A hyperscaler wired $200 million before a lease existed. Four out of five teams merged code nobody on the team fully understood. The announcement and the merge are the easy part. The lease and the review are the actual work, and they're the parts that keep getting deferred.
+
+I know which side of that I'm on. I'm a WGU software engineering student who works IT support during the day and writes code at night. I've resolved 2,579 tickets. Most of that work is reading something carefully and saying whether it's right or wrong. Nobody writes a press release about a ticket closed correctly. But that's the job.
+
+My nightly commits are small on purpose. I read them before I push. That sounds painfully obvious, and it is, which is maybe why 81% is such a startling number. Reading the thing before you sign it shouldn't be a skill. It shouldn't be a differentiator. But right now, in a Texas Panhandle power deal and in codebases everywhere, it kind of is.
+
+Fermi has until December 31 to turn a prepayment into a lease. That's a real deadline, and it's checkable. I'll be watching whether it happens. The code side doesn't have a deadline like that. It just has the next merge, and the one after it, and the bug that shows up in production three weeks later when nobody remembers who approved what.
+
+I don't know whether Fermi's campus gets built. I don't know whether the hyperscaler ever signs. What I know is the shape of the thing. A promise is not a result. A merge is not a review. And the boring check at the end is still the whole job.
+
+*Sources: [Fermi's Q3 2026 results announcement](https://www.morningstar.com/news/accesswire/1250444msn/fermi-announces-new-agreements-with-investment-grade-hyperscaler-and-third-quarter-2026-financial-results) (Nov 12, 2026); [The Desk Research on Fermi's 10-Q](https://www.thedeskresearch.com/publications/fermis-10-q-confirms-the-tensorwave-lease-is-d3b9105e) (Nov 13, 2026); [Tech Times on the prepayment and missing lease](https://www.techtimes.com/articles/330603/20261114/fermi-project-matador-announces-200-million-hyperscaler-prepayment-no-signed-lease-before-year-end.htm) (Nov 14, 2026); [TestMu AI's State of AI in Quality Engineering 2026 report](https://www.prnewswire.com/news-releases/81-of-software-teams-have-merged-ai-written-code-they-didnt-fully-understand-finds-testmu-ais-state-of-ai-in-quality-engineering-2026-report-302938904.html) (Nov 13, 2026); [Express Computer on the TestMu findings](https://www.expresscomputer.in/news/81-of-teams-have-merged-ai-code-they-didnt-understand-and-only-41-check-it-before-it-ships/141330/) (Nov 14, 2026).*
+
+*Cover photo: Thomas C. Ferguson Power Plant, a natural gas plant near Horseshoe Bay, Texas, photographed by Larry D. Moore on July 31, 2024, via Wikimedia Commons (CC BY 4.0).*
