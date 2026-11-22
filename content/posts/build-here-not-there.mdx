@@ -1,0 +1,45 @@
+---
+title: "Build it here, not there"
+date: 2026-11-22
+excerpt: "On Friday the president said US companies that build data centers abroad will face a 'tremendous tax.' The same week, the most interesting new model for a student is one that runs on a laptop. One week, two directions."
+tags: ["ai", "data-centers", "tech-news"]
+image: "/posts/build-here-not-there.jpg"
+---
+
+I woke up Saturday and the first two headlines in my feed were pulling in opposite directions. One was about where the biggest buildings in tech are allowed to go. The other was about a model that fits on a laptop.
+
+On Friday, at a White House press conference after his trip to Asia, President Trump said US companies will not be allowed to build data centers in other countries. His words, as the Associated Press printed them: "We're not going to allow our companies to build data centers outside of our country. If they do that, they can. But we're going to put a tremendous tax on them."
+
+He named Finland. "They want to build now one in Finland," he said. Google announced a roughly $15 billion AI infrastructure investment there in September, its largest single investment in Europe.
+
+There is no tax yet. Trump said he hadn't even told his own officials about the plan before announcing it. No rate, no date, no definition of what counts as building abroad. Any tax like that is up to Congress, not the White House, and Bloomberg Law noted he didn't detail how it would be carried out or what legal authority the government has to impose one.
+
+So it's a threat, not a law. But threats move plans. Amazon, Google, Microsoft, Meta and Oracle all already run data centers outside the US. You build near your customers, sometimes because local rules say you have to. None of them commented right away.
+
+The same week, the Senate passed a bipartisan permitting bill on Thursday that now goes to the House. It speeds up permitting for power plants and transmission lines, and it makes data centers pay for the energy they use and for grid upgrades. Trump praised it at the same press conference. "It's going to cause tremendous amounts of new building," he said.
+
+So the message from Washington this week is two things at once: build it here, and build it fast. But pay for the grid yourself.
+
+The problem is the third voice in the room. The public. A CNBC survey found 63% of registered voters opposed an AI data center within 10 miles of their home. Only 13% said they would support one. A summer AP-NORC survey found about 6 in 10 Americans support limiting how many new data centers get built, mostly over electricity prices and water.
+
+Build here, not there. Don't build near me. Pay for the grid. That's the week the buildout had. The biggest tech companies are expected to spend about $1.4 trillion on AI next year, mostly on data centers, according to UBS. Every one of those buildings needs a permit, a power contract, a water plan, and a town that will take it.
+
+I've spent the month writing about versions of this. A prepayment is not a lease. A merge is not a review. A great quarter is not a clean bill of health. This week added one more: an announcement is not a law, and a law is not a building.
+
+On Friday, the same day, Thinking Machines Lab released Inkling 2 Mini. Open-weights, Apache 2.0 license, small enough to run on a laptop. 26.4 billion parameters total, about 3.4 billion active per token, and the whole checkpoint is about 20 gigabytes. The trick is a loop: the middle layers run three times for every token, so the model gets more reasoning out of the same weights. The lab says it ran offline on a MacBook Pro and built a playable flight simulator in a few minutes.
+
+Artificial Analysis, an independent evaluator, scored it 20 on its Intelligence Index, level with Qwen3.8 27B.
+
+I haven't run it yet. And the fine print is interesting too. An independent check found it writes about 38% more tokens than Qwen3.8 27B on the same tasks, so the "fewer tokens" claim doesn't hold up the way the lab framed it. The model card itself warns it can get stuck in long reasoning loops when debugging, and that it may delete or overwrite files without asking. Run it in a sandbox. And the llama.cpp files for it had a bug that only got fixed on Saturday.
+
+That last part is the part I actually like. llama.cpp hit 1.0 last week, and it's already the shortest path to running this thing locally. A release on Friday has a working local build by Saturday.
+
+Nobody is going to tax a model on my laptop. Nobody has to permit it, or hold a town hall about it, or sign a power contract for it. It just runs, or it doesn't, and I can read the output and decide for myself.
+
+I'm a WGU software engineering student. I work IT support during the day and write code at night, and my evenings go to CodePath interview prep, reading code I didn't write and trying to say what's wrong with it. That is a small skill. It doesn't feel like much next to a $15 billion campus in Finland or a $1.4 trillion buildout.
+
+But this week made the case for it better than I could. The giant stuff is stuck in a fight between three groups that all want different things. The small stuff works right now, on hardware I already own, and the only check it needs is me reading what it did. That's the part of this industry I can actually practice.
+
+*Sources: [USA Today on the data center tax threat](https://www.usatoday.com/story/tech/nation-now/2026/11/20/trump-tax-ai-data-centers/92881622007/) (Nov 20, 2026); [Wall Street Journal on the tax threat](https://www.wsj.com/politics/policy/trump-to-hold-white-house-press-conference-following-trip-to-asia-25c8ecc0) (Nov 20, 2026); [Bloomberg Law on the tax threat](https://news.bloomberglaw.com/financial-accounting/trump-threatens-to-tax-companies-building-data-centers-abroad) (Nov 20, 2026); [The Edge on the tax threat, the permitting bill and the polls](https://edgeconsultancykw.com/trump-tremendous-tax-us-companies-ai-data-centers-abroad-november-2026/) (Nov 21, 2026); [CASRAI on Inkling 2 Mini](https://casrai.org/news/thinking-machines-inkling-2-mini-open-looped-model-laptop-2026) (Nov 21, 2026); [Greensboro Times on the independent Inkling 2 Mini check](https://www.greensborotimes.com/stories/inkling-2-mini-promised-fewer-tokens-it-writes-more-and-each-one-is-cheap,2276716) (Nov 21, 2026); [DEV on running Inkling 2 Mini locally](https://dev.to/aistudio_video/check-hardware-and-context-caps-before-you-run-inkling-2-mini-locally-2j9j) (Nov 21, 2026).*
+
+*Cover photo: Google's data center in Eemshaven, Netherlands, photographed by Ymnes on October 21, 2018, via Wikimedia Commons (CC BY-SA 4.0).*
