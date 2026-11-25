@@ -1,0 +1,53 @@
+---
+title: "The lender said no"
+date: "2026-11-25"
+excerpt: "Tuesday the market found out who actually pays for the AI buildout. It isn't the chip companies. It's the lenders. And one of them just said no."
+tags: ["ai", "data-centers", "tech-news"]
+image: "/posts/the-lender-said-no.jpg"
+---
+
+Tomorrow is Thanksgiving. I'm up early anyway, coffee in my hand, scrolling through the numbers before the holiday. And the numbers from yesterday are ugly in a way I haven't seen yet this month.
+
+Monday, Hewlett Packard Enterprise reported earnings. Revenue came in at $14.55 billion, up from $9.68 billion a year ago, ahead of what analysts expected. And on the earnings call, CEO Antonio Neri said something that mattered more than any of those numbers.
+
+"Although HPE Financial Services does support the AI opportunity, it has not provided financing to neocloud or high-risk customers."
+
+Neoclouds rent out AI computing. They buy Nvidia chips, mostly with borrowed money, and lease the capacity. HPE sells the servers those chips live in. And HPE just said, publicly, that its financing arm won't lend to them.
+
+Tuesday the market answered. CoreWeave fell 11.9% to $42.60. IREN fell 11.5%. Nebius fell 10.7%. Nvidia fell 5.9%. HPE itself fell 16.3%, even after beating expectations and raising its outlook. The yield on CoreWeave's bonds due 2031 rose to almost 18%. Anthropic dropped below its $83 IPO price.
+
+Then Dell reported after the close, and the numbers were absurd in the other direction. Revenue $54.9 billion, more than double a year ago. AI server revenue $22 billion, up 291%. Sixty billion dollars in new AI orders, a record $132.3 billion backlog. Dell raised its full-year revenue forecast to $202 billion and its AI server forecast to $78 billion. Dell's stock still fell about 7% Wednesday morning.
+
+So the demand is real. Nobody is saying the servers aren't selling. The question is who pays for them, and on what terms.
+
+## The check keeps changing shape
+
+I've been writing about this all month. The build keeps outrunning the check, and the check keeps showing up in a new form. First the SEC looking at Nvidia's books. Then a tax threat on building abroad. Then server prices moving after the contract was signed. Now the lender.
+
+I don't own any of these stocks. I'm a WGU software engineering student who works IT support during the day and writes code at night. I'm watching this from the cheap seats. But the pattern is the same one I see in my own work. The exciting part gets built fast. The boring part decides whether any of it holds up. In IT support, the boring part is the change window and the review queue. In the AI buildout, it's credit. Somebody has to underwrite a company whose whole business is renting out hardware it bought with debt. HPE looked at that and said no. One lender saying no doesn't stop the build. It does change the price of everything after it.
+
+## Eleven minutes
+
+The other story this week is the one that actually scared me, and it has nothing to do with stocks.
+
+On November 20, Amazon's threat intelligence team published a report about an intrusion from September. A threat actor ran autonomous AI agents built on an open-source framework called Cairn. The agents were given a list of university IP addresses and one instruction in plain language: obtain shell access. Everything after that was the agents' own work.
+
+Against one target, a university server running MONAI Label, an open-source tool research teams use to label medical images, the agents mapped the API, found a file upload endpoint that took a filename without checking it, and turned that into a path traversal flaw. Eleven minutes passed between mapping the API and writing arbitrary files on the server. In a later session they planted a reverse shell in a Python startup file and got root.
+
+Amazon assesses with high confidence it was a real zero-day. The flaw is tracked as CVE-2026-133968, rated 9.8 out of 10. It affects MONAI Label 0.8.5 and earlier. Authentication is off by default on those servers, so anyone who can reach one over the network can exploit it. Amazon attributes the campaign to a Chinese-nexus actor with moderate confidence, based on the language in the prompts and the timestamps.
+
+Here's the part that stays with me. The agents failed most of the time. Against a Redis instance at another university they worked for sixteen hours, took 148 actions, and got nowhere. Against a GPU server they burned six hours and tested more than 30,000 credential combinations and got nothing. Agents aren't magic. They fail a lot, the same way I do when I'm stuck on a bug at midnight.
+
+But when they hit, they hit in eleven minutes. And the fix for this one was merged on October 19. The advisory went out November 18. The patched release, 0.8.6, didn't ship until November 22. More than a month between the fix being merged and the fix being something you could actually download. CISA had to give federal agencies three days to patch it, because plenty of servers are still running the old version.
+
+That is the same shape as the HPE story, just at a different scale. The build is fast. The check is slow. The review, the patch, the credit decision, the thing that says wait, this needs a second look. That part is always slower than the part that ships.
+
+I think about that when I'm doing my nightly commits. Small changes, read the diff before I push. CodePath drills where the whole point is reading code you didn't write and finding the problem before it ships. None of it is exciting. It is the only part that actually protects anything.
+
+Tomorrow I'll eat too much turkey and probably still push a commit. The build doesn't stop for the holiday. Neither does the check.
+
+---
+
+*Cover photo: AWS data center campus in Oregon, with a fourth building under construction. Photo by Tedder, August 2023, CC BY-SA 4.0, via Wikimedia Commons.*
+
+*Sources: [Reuters, AI stocks slide on fears over infrastructure buildout costs](https://www.reuters.com/business/ai-stocks-slide-fears-over-infrastructure-buildout-costs-2026-11-25/) · [Reuters, Dell lifts annual forecasts after record quarter](https://www.reuters.com/business/dell-lifts-annual-forecasts-after-record-quarter-surging-ai-server-demand-2026-11-24/) · [Stocktwits, HPE steers clear of financing neocloud customers](https://stocktwits.com/news-articles/markets/equity/hewlett-packard-steers-clear-of-financing-neocloud-or-high-risk-customers-hpe-stock-dips-despite-q4-beat-and-raise/cNbrU1ER9kT) · [SecurityWeek, Amazon: China-linked hackers' AI agents exploited medical software zero-day](https://www.securityweek.com/amazon-china-linked-hackers-ai-agents-exploited-medical-software-zero-day/) · [Cloud Security Alliance, MONAI Label zero-day research note](https://labs.cloudsecurityalliance.org/research/csa-research-note-monai-label-agent-discovered-zero-day-2026/)*
