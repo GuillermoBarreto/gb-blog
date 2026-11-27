@@ -1,0 +1,55 @@
+---
+title: "The rule stopped the trucks"
+date: 2026-11-27
+excerpt: "Nvidia told Dell and Supermicro to stop shipping servers to four countries, and Anthropic rewrote its core API in Rust. Both stories are about the same thing: the check is the work."
+tags: ["ai", "data-centers", "nvidia", "software-engineering"]
+image: "/posts/the-rule-stopped-the-trucks.jpg"
+---
+
+Black Friday morning. The house is still asleep. I'm on the couch with my laptop, coffee going cold, scrolling through the news before anyone else is up.
+
+Two stories caught me. One is about trucks that aren't moving. The other is about code that got rewritten in a language the team didn't know. But they're the same story, really. The check is the work. Everything else is just the announcement.
+
+First, the trucks. The Financial Times reported yesterday that Nvidia told its manufacturing partners, Dell and Supermicro included, to stop shipping servers with its chips to Malaysia, Singapore, Thailand and Indonesia. Not slow down. Stop. Dell and Supermicro have already told buyers in those countries their orders aren't going out.
+
+This is the rule I wrote about ten days ago finally biting. The Commerce Department's interim rule on remote access to advanced chips took effect November 19. It says you need a license when the equipment ends up in a data center giving that much compute to companies in China, Russia and a few other places. Data centers serving those customers have 90 days to get a license. And there's no guidance yet on how to actually do it. One cloud executive told the FT there was "no guidance on execution" and that it was "causing sheer chaos in the region." The FT says it's unclear whether the halt is temporary while Nvidia figures out compliance.
+
+Nvidia booked $104 billion of revenue through its Singapore unit in 2025. That's not a side market. That's the region. Some of that is revenue from elsewhere routed through Singapore, so not all of it is exposed.
+
+On Wednesday, S&P put Nvidia's AA credit rating on CreditWatch Negative. That means a downgrade could come within 90 days, probably one notch, to AA-. Still investment grade. But the reason matters. S&P didn't question the chips or the revenue. Nvidia just reported $115.8 billion in a quarter. S&P questioned the board. Board independence. Oversight of senior executives. Succession planning. The eleven days between Jensen Huang's resignation on November 12 and his reinstatement on November 23 didn't answer those questions, in S&P's view. Moody's had already cut its outlook from positive to stable the week before.
+
+So the check landed twice in one week on the same company. Once as a rule that stops shipments. Once as a rating agency saying, we don't trust the governance yet. The quarter was the best ever. None of that mattered.
+
+## The part that stuck with me
+
+The second story is the one I can't stop thinking about, because it's my world. Or the world I'm trying to get into.
+
+Anthropic published an engineering post on Tuesday about moving its Messages API from Python to Rust. That's the API every Claude request goes through. Their own apps use it too. Claude Code, Cowork, all of it. They built it in Python in 2023. Then traffic grew about 1,800 times between early 2024 and fall of this year. Python couldn't keep up. So they rewrote the whole thing in Rust.
+
+Claude wrote the first version of the core request path in about a week. By May of this year, Claude was writing more than 80 percent of the code Anthropic merged. The results are real: about 70 percent less CPU per request, more than 80 percent less memory, and the median time to first token down about 20 percent. Public traffic switched over to Rust in September. They did it without taking the service offline and without freezing new features.
+
+But the part that stuck with me is how they knew it was right.
+
+They had about 700 integration tests. When they audited the ported tests, they found more than 100 assertions that had been quietly weakened along the way. And the test suite couldn't cover the combinations anyway. Twenty binary request options make more than a million combinations. At one second per test, that's twelve days of testing for one model, before you even vary the prompts.
+
+So they used the old Python API as the judge. They replayed real production traffic through both versions and compared every step. In April, only 24 percent of inputs matched. Early May it dropped to 6.5 percent, because the new tests kept finding more differences. By August it was 99.6 percent. Five months of grinding from mostly wrong to basically the same. The code took a week. Proving it took five months.
+
+I read that and thought about my own nightly commits. Small stuff. A function here, a fix there. And even at my scale, the writing is the easy part. The review is the work. The test that actually catches something. The diff I read twice because the first read missed it.
+
+That's the thread running through this whole month. A $200 million prepayment with no lease. A fix for a zero-day that sat merged for a month before anyone could download it. Now a rule that stops trucks, a rating agency that stops trusting, and a rewrite that only shipped because someone built a machine to prove it was right.
+
+The building is the fun part. The check is the job. And the check doesn't care how good the quarter was, or how fast the agent wrote the code.
+
+I'm still a student. I've got a Python OA I haven't sat for yet, and CodePath drills waiting for me this weekend. I don't know Rust. But I know which half of that story I'd want to be good at. Not the week of writing. The five months of proving.
+
+---
+
+**Sources**
+
+- [Nvidia halts server shipments to Southeast Asia, FT reports (Reuters)](https://www.reuters.com/commentary/breakingviews/uaes-nvidia-free-pass-is-less-free-than-it-was-2026-11-26/)
+- [Nvidia hits pause on chip shipments to Southeast Asia (TechCrunch)](https://techcrunch.com/2026/11/26/nvidia-hits-pause-on-chip-shipments-to-southeast-asia/)
+- [Nvidia faces possible credit downgrade as governance concerns mount (Barron's)](https://www.barrons.com/articles/nvidia-credit-rating-sp-downgrade-d6c982ff)
+- [Migrating our Messages API to Rust (Anthropic)](https://www.anthropic.com/research/migrating-api-to-rust)
+- [Anthropic rewrites the Claude API in Rust (DataStudios)](https://www.datastudios.org/post/anthropic-rewrites-claude-api-in-rust-20-percent-faster-first-tokens)
+
+*Cover: "Port of Singapore" by Aaaatu, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), via Wikimedia Commons.*
